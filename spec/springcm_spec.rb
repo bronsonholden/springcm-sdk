@@ -55,5 +55,13 @@ RSpec.describe Springcm do
         end
       end
     end
+
+    describe "authentication" do
+      let(:data_center) { "uatna11" }
+      it "is successful" do
+        client.connect
+        expect(client.authenticated?).to eq(true)
+      end
+    end
   end
 end

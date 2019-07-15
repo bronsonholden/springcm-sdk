@@ -12,6 +12,26 @@ module Springcm
       @client_secret = client_secret
       @api_version = "201411"
       @auth_version = "201606"
+      @access_token
+    end
+
+    def connect
+      conn = Faraday.new(url: auth_url)
+      res = conn.post do |req|
+        req.url '/'
+        req.body = {
+          client_id: @client_id,
+          client_secret: @client_secret
+        }.to_json
+      end
+      data = JSON.parse(res.body)
+      @access_token = data.fetch("access_token")
+      true
+    end
+
+    def authenticated?
+      # TODO: and not expired
+      !!@access_token
     end
 
     def object_api_url
