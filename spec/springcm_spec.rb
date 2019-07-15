@@ -21,7 +21,7 @@ RSpec.describe Springcm do
     test_valid_data_center "na11"
 
     context "with invalid data center" do
-      let(:data_center) { 'narnia' }
+      let(:data_center) { "narnia" }
       it "raises connection info error" do
         expect { client }.to raise_error(Springcm::ConnectionInfoError)
       end

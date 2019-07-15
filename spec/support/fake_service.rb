@@ -12,9 +12,9 @@ class FakeService < Sinatra::Base
     content_type :json
     status status_code
     if file_name
-      File.open(File.dirname(__FILE__) + '/../fixtures/' + file_name, 'rb').read
+      File.open(File.dirname(__FILE__) + "/../fixtures/" + file_name, "rb").read
     else
-      ''
+      ""
     end
   end
 end

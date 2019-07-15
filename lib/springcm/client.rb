@@ -3,7 +3,7 @@ require "faraday"
 module Springcm
   class Client
     def initialize(data_center:, client_id:, client_secret:)
-      if !['na11', 'uatna11'].include?(data_center)
+      if !["na11", "uatna11"].include?(data_center)
         raise Springcm::ConnectionInfoError.new("Invalid data center '#{data_center.to_s}'")
       end
 
@@ -18,7 +18,7 @@ module Springcm
     def connect
       conn = Faraday.new(url: auth_url)
       res = conn.post do |req|
-        req.url '/'
+        req.url "/"
         req.body = {
           client_id: @client_id,
           client_secret: @client_secret
@@ -53,10 +53,10 @@ module Springcm
     private
 
     def auth_subdomain_suffix
-      if @data_center.start_with?('uat')
-        'uat'
+      if @data_center.start_with?("uat")
+        "uat"
       else
-        ''
+        ""
       end
     end
   end
