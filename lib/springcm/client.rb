@@ -26,12 +26,12 @@ module Springcm
       end
       data = JSON.parse(res.body)
       @access_token = data.fetch("access_token")
+      @expiry = Time.now + data.fetch("expires_in")
       true
     end
 
     def authenticated?
-      # TODO: and not expired
-      !!@access_token
+      !!@access_token && @expiry > Time.now
     end
 
     def object_api_url
