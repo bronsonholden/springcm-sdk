@@ -1,5 +1,7 @@
 # SpringCM
 
+[![Build Status](https://travis-ci.org/paulholden2/springcm.svg?branch=master)](https://travis-ci.org/paulholden2/springcm)
+
 This gem is a library for working with the SpringCM REST API.
 
 ## Installation
