@@ -26,5 +26,34 @@ RSpec.describe Springcm do
         expect { client }.to raise_error(Springcm::ConnectionInfoError)
       end
     end
+
+    describe "object API URL helpers" do
+      let(:data_center) { "uatna11" }
+      it "returns valid object URL" do
+        expect(client.object_api_url).to eq("https://apiuatna11.springcm.com/v201411")
+      end
+      it "returns valid content download URL" do
+        expect(client.download_api_url).to eq("https://apidownloaduatna11.springcm.com/v201411")
+      end
+      it "returns valid content upload URL" do
+        expect(client.upload_api_url).to eq("https://apiuploaduatna11.springcm.com/v201411")
+      end
+    end
+
+    describe "auth URL helper" do
+      context "UAT data center" do
+        let(:data_center) { "uatna11" }
+        it "returns valid auth API URL" do
+          expect(client.auth_url).to eq("https://authuat.springcm.com/api/v201606/apiuser")
+        end
+      end
+
+      context "production data center" do
+        let(:data_center) { "na11" }
+        it "returns valid auth API URL" do
+          expect(client.auth_url).to eq("https://auth.springcm.com/api/v201606/apiuser")
+        end
+      end
+    end
   end
 end
