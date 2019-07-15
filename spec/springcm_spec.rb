@@ -4,7 +4,7 @@ RSpec.describe Springcm do
   end
 
   describe Springcm::Client do
-    def self.test_data_center(data_center)
+    def self.test_valid_data_center(data_center)
       context data_center do
         let(:data_center) { data_center }
         it "successfully creates client" do
@@ -17,7 +17,7 @@ RSpec.describe Springcm do
     let(:client_secret) { "client_secret" }
     let(:client) { Springcm::Client.new(data_center: data_center, client_id: client_id, client_secret: client_secret) }
 
-    test_data_center "uatna11"
-    test_data_center "na11"
+    test_valid_data_center "uatna11"
+    test_valid_data_center "na11"
   end
 end
