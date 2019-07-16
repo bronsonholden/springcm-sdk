@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "springcm/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "springcm"
+  spec.name          = "springcm-sdk"
   spec.version       = Springcm::VERSION
   spec.authors       = ["Paul Holden"]
   spec.email         = ["pholden@stria.com"]
