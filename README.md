@@ -1,6 +1,6 @@
 # SpringCM
 
-[![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk)
+[![Gem Version](https://badge.fury.io/rb/springcm-sdk.svg)](https://badge.fury.io/rb/springcm-sdk) [![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk)
 
 This gem is a library for working with the SpringCM REST API.
 
