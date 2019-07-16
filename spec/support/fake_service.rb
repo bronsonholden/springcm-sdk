@@ -8,13 +8,13 @@ class FakeService < Sinatra::Base
     JSON.parse(request.body.read)
   end
 
-  def json_response(status_code, file_name=nil)
+  def json_response(status_code, json)
     content_type :json
     status status_code
-    if file_name
-      File.open(File.dirname(__FILE__) + "/../fixtures/" + file_name, "rb").read
-    else
-      ""
-    end
+    json
+  end
+
+  def json_file_response(status_code, file_name=nil)
+    json_response status_code, File.open(File.dirname(__FILE__) + "/../fixtures/" + file_name, "rb").read
   end
 end
