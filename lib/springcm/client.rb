@@ -24,10 +24,17 @@ module Springcm
           client_secret: @client_secret
         }.to_json
       end
-      data = JSON.parse(res.body)
-      @access_token = data.fetch("access_token")
-      @expiry = Time.now + data.fetch("expires_in")
-      true
+      ok = res.success?
+      if ok
+        data = JSON.parse(res.body)
+        @access_token = data.fetch("access_token")
+        @expiry = Time.now + data.fetch("expires_in")
+        true
+      else
+        @access_token = nil
+        @expiry = nil
+        false
+      end
     end
 
     def authenticated?

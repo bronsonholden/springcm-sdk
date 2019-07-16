@@ -58,9 +58,18 @@ RSpec.describe Springcm do
 
     describe "authentication" do
       let(:data_center) { "uatna11" }
-      it "is successful" do
-        client.connect
-        expect(client.authenticated?).to eq(true)
+      context "with valid credentials" do
+        it "is successful" do
+          client.connect
+          expect(client.authenticated?).to eq(true)
+        end
+      end
+      context "with invalid credentials" do
+        let(:client_id) { "sandman" }
+        it "fails" do
+          client.connect
+          expect(client.authenticated?).to eq(false)
+        end
       end
     end
   end
