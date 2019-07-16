@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{A library for working with the SpringCM REST API.}
   spec.description   = %q{A library for working with the SpringCM REST API and associated objects in Ruby applications.}
-  spec.homepage      = "https://github.com/paulholden2/springcm"
+  spec.homepage      = "https://github.com/paulholden2/springcm-sdk"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -20,8 +20,9 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "https://github.com/paulholden2/springcm"
-    # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+    spec.metadata["source_code_uri"] = "https://github.com/paulholden2/springcm-sdk"
+    spec.metadata["documentation_uri"] = "https://rubydoc.info/github/paulholden2/springcm-sdk/#{Springcm::VERSION}"
+    spec.metadata["changelog_uri"] = "https://github.com/paulholden2/springcm-sdk/blob/master/CHANGELOG.md"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."
