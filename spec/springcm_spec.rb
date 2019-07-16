@@ -3,6 +3,13 @@ RSpec.describe Springcm do
     expect(Springcm::VERSION).not_to be nil
   end
 
+  describe Springcm::Error do
+    let(:exception) { Springcm::Error.new('Test exception') }
+    it "reports on inspection" do
+      expect(exception.inspect).to match(/Test exception/)
+    end
+  end
+
   describe Springcm::Client do
     def self.test_valid_data_center(data_center)
       context data_center do
