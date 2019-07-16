@@ -2,6 +2,9 @@ require "faraday"
 
 module Springcm
   class Client
+    # @param data_center [String] Data center name, e.g. uatna11
+    # @param client_id [String] Your API client ID
+    # @param client_secret [String] Your API client secret
     def initialize(data_center:, client_id:, client_secret:)
       if !["na11", "uatna11"].include?(data_center)
         raise Springcm::ConnectionInfoError.new("Invalid data center '#{data_center.to_s}'")
@@ -15,6 +18,9 @@ module Springcm
       @access_token
     end
 
+    # Connect to the configured SpringCM API service
+    # @param safe If truthy, connection failure does not raise an exception
+    # @return [Boolean] Whether connection was successful
     def connect(safe=true)
       conn = Faraday.new(url: auth_url)
       res = conn.post do |req|
@@ -33,29 +39,37 @@ module Springcm
         @access_token = nil
         @expiry = nil
         raise Springcm::InvalidClientIdOrSecretError.new if !safe
+        false
       end
     end
 
+    # Shorthand for connecting unsafely
     def connect!
       connect(false)
     end
 
+    # Check if client is successfully authenticated
+    # @return [Boolean] Whether a valid, unexpired access token is held.
     def authenticated?
       !!@access_token && @expiry > Time.now
     end
 
+    # Get the URL for object API requests
     def object_api_url
       "https://api#{@data_center}.springcm.com/v#{@api_version}"
     end
 
+    # Get the URL for content upload API requests
     def upload_api_url
       "https://apiupload#{@data_center}.springcm.com/v#{@api_version}"
     end
 
+    # Get the URL for content download requests
     def download_api_url
       "https://apidownload#{@data_center}.springcm.com/v#{@api_version}"
     end
 
+    # Get the URL for authentication requests
     def auth_url
       "https://auth#{auth_subdomain_suffix}.springcm.com/api/v#{@auth_version}/apiuser"
     end

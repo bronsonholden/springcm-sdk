@@ -1,3 +1,5 @@
 Gemfile.lock
 springcm-sdk-*.gem
 coverage
+.yardoc
+doc
