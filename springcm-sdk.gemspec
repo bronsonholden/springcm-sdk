@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Paul Holden"]
   spec.email         = ["pholden@stria.com"]
 
-  spec.summary       = %q{A library API working with the SpringCM REST API.}
-  spec.description   = %q{A library API working with the SpringCM REST API.}
+  spec.summary       = %q{A library for working with the SpringCM REST API.}
+  spec.description   = %q{A library for working with the SpringCM REST API and associated objects in Ruby applications.}
   spec.homepage      = "https://github.com/paulholden2/springcm"
   spec.license       = "MIT"
 
