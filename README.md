@@ -1,6 +1,6 @@
 # SpringCM
 
-[![Gem Version](https://badge.fury.io/rb/springcm-sdk.svg)](https://badge.fury.io/rb/springcm-sdk) [![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk)
+[![Gem Version](https://badge.fury.io/rb/springcm-sdk.svg)](https://badge.fury.io/rb/springcm-sdk) [![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk) [![Maintainability](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/maintainability)](https://codeclimate.com/github/paulholden2/springcm-sdk/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/test_coverage)](https://codeclimate.com/github/paulholden2/springcm-sdk/test_coverage)
 
 This gem is a library for working with the SpringCM REST API.
 
