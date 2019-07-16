@@ -15,7 +15,7 @@ module Springcm
       @access_token
     end
 
-    def connect
+    def connect(safe=true)
       conn = Faraday.new(url: auth_url)
       res = conn.post do |req|
         req.url "/"
@@ -24,8 +24,7 @@ module Springcm
           client_secret: @client_secret
         }.to_json
       end
-      ok = res.success?
-      if ok
+      if res.success?
         data = JSON.parse(res.body)
         @access_token = data.fetch("access_token")
         @expiry = Time.now + data.fetch("expires_in")
@@ -33,8 +32,12 @@ module Springcm
       else
         @access_token = nil
         @expiry = nil
-        false
+        raise Springcm::InvalidClientIdOrSecretError.new if !safe
       end
+    end
+
+    def connect!
+      connect(false)
     end
 
     def authenticated?

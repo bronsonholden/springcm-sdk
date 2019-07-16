@@ -66,9 +66,12 @@ RSpec.describe Springcm do
       end
       context "with invalid credentials" do
         let(:client_id) { "sandman" }
-        it "fails" do
+        it "fails quietly" do
           client.connect
           expect(client.authenticated?).to eq(false)
+        end
+        it "fails loudly" do
+          expect { client.connect! }.to raise_error(Springcm::InvalidClientIdOrSecretError)
         end
       end
     end
