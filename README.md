@@ -1,4 +1,4 @@
-# SpringCM
+# SpringCM SDK
 
 [![Gem Version](https://badge.fury.io/rb/springcm-sdk.svg)](https://badge.fury.io/rb/springcm-sdk) [![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk) [![Maintainability](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/maintainability)](https://codeclimate.com/github/paulholden2/springcm-sdk/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/test_coverage)](https://codeclimate.com/github/paulholden2/springcm-sdk/test_coverage)
 
@@ -9,7 +9,7 @@ This gem is a library for working with the SpringCM REST API.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'springcm'
+gem 'springcm-sdk'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install springcm
+    $ gem install springcm-sdk
 
 ## Usage
 
@@ -32,7 +32,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/paulholden2/springcm.
+Bug reports and pull requests are welcome on GitHub at https://github.com/paulholden2/springcm-sdk.
 
 ## License
 
