@@ -1,4 +1,5 @@
 require "faraday"
+require "springcm/folder"
 
 module Springcm
   class Client
@@ -46,6 +47,16 @@ module Springcm
     # Shorthand for connecting unsafely
     def connect!
       connect(false)
+    end
+
+    def root_folder
+      conn = Faraday.new(url: object_api_url)
+      res = conn.get do |req|
+        req.url "/folders?systemfolder=root"
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+      end
     end
 
     # Check if client is successfully authenticated
