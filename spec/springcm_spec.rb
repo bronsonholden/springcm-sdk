@@ -82,6 +82,14 @@ RSpec.describe Springcm do
         end
       end
     end
+
+    describe "folder usage" do
+      let(:data_center) { "uatna11" }
+      let(:folder) { client.root_folder }
+      it "retrieves root folder" do
+        expect(folder).to be_a(Springcm::Folder)
+      end
+    end
   end
 
   describe Springcm::Folder do

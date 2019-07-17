@@ -52,10 +52,14 @@ module Springcm
     def root_folder
       conn = Faraday.new(url: object_api_url)
       res = conn.get do |req|
-        req.url "/folders?systemfolder=root"
+        req.url "/folders"
+        req.params["systemfolder"] = "root"
       end
       if res.success?
         data = JSON.parse(res.body)
+        return Folder.new(data, self)
+      else
+        nil
       end
     end
 
