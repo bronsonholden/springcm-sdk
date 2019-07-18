@@ -5,6 +5,10 @@ module Springcm
       @data = data
     end
 
+    def uid
+      href[-36..-1]
+    end
+
     def method_missing(m, *args, &block)
       key = m.to_s.split("_").map(&:capitalize).join
       if @data.key?(key)
