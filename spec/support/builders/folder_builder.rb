@@ -32,12 +32,12 @@ class FolderBuilder
   def data
     {
         "Name" => "#{@name}",
-        "CreatedDate" => "2000-01-01T00 =>00 =>00.000Z",
+        "CreatedDate" => "2000-01-01T00:00:00.000Z",
         "CreatedBy" => "support@springcm.com",
-        "UpdatedDate" => "2000-01-01T00 =>00 =>00.000Z",
+        "UpdatedDate" => "2000-01-01T00:00:00.000Z",
         "UpdatedBy" => "System",
         "Description" => "",
-        "BrowseDocumentsUrl" => "https =>//uatna11.springcm.com/atlas/Link/Folder/0/#{@uid}",
+        "BrowseDocumentsUrl" => "https://uatna11.springcm.com/atlas/Link/Folder/0/#{@uid}",
         "AccessLevel" => {
             "See" => true,
             "Read" => true,
@@ -47,16 +47,16 @@ class FolderBuilder
             "SetAccess" => true
         },
         "Documents" => {
-            "Href" => "https =>//apiuatna11.springcm.com/v201411/folders/#{@uid}/documents"
+            "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}/documents"
         },
         "Folders" => {
-            "Href" => "https =>//apiuatna11.springcm.com/v201411/folders/#{@uid}/folders"
+            "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}/folders"
         },
         "ShareLinks" => {
-            "Href" => "https =>//apiuatna11.springcm.com/v201411/folders/#{@uid}/sharelinks"
+            "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}/sharelinks"
         },
-        "CreateDocumentHref" => "https =>//apiuploaduatna11.springcm.com/v201411/folders/#{@uid}/documents{?name}",
-        "Href" => "https =>//apiuatna11.springcm.com/v201411/folders/#{@uid}"
+        "CreateDocumentHref" => "https://apiuploaduatna11.springcm.com/v201411/folders/#{@uid}/documents{?name}",
+        "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}"
     }
   end
 end
