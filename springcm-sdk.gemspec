@@ -46,4 +46,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 3.6"
   spec.add_development_dependency "simplecov", "~> 0.17"
   spec.add_development_dependency "yard", "~> 0.9"
+  spec.add_development_dependency "uuid", "~> 2.3"
 end
