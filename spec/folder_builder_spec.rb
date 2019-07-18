@@ -2,6 +2,7 @@ RSpec.describe FolderBuilder do
   let(:client) { Springcm::Client.new(data_center: 'uatna11', client_id: 'client_id', client_secret: 'client_secret') }
   let(:uid) { UUID.generate }
   let(:folder_name) { "My Folder" }
+  let(:login_name) { "johndoe@email.com" }
   let(:builder) { FolderBuilder.new(client).uid(uid) }
   let(:folder) { builder.build }
 
@@ -36,5 +37,15 @@ RSpec.describe FolderBuilder do
     now = Time.now
     builder.updated_date(now)
     expect(folder.updated_date).to eq(now.strftime("%FT%T.%3NZ"))
+  end
+
+  it "sets created_by" do
+    builder.created_by(login_name)
+    expect(folder.created_by).to eq(login_name)
+  end
+
+  it "sets updated_by" do
+    builder.updated_by(login_name)
+    expect(folder.updated_by).to eq(login_name)
   end
 end
