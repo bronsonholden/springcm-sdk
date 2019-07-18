@@ -9,6 +9,14 @@ RSpec.describe FolderBuilder do
     expect { builder.uid("not-a-uuid") }.to raise_error(ArgumentError)
   end
 
+  it "created_date format is correct" do
+    expect(folder.created_date).to eq("2000-01-01T00:00:00.000Z")
+  end
+
+  it "updated_date format is correct" do
+    expect(folder.created_date).to eq("2000-01-01T00:00:00.000Z")
+  end
+
   it "sets UID" do
     expect(folder.uid).to eq(uid)
   end
@@ -16,5 +24,17 @@ RSpec.describe FolderBuilder do
   it "sets name" do
     builder.name(folder_name)
     expect(folder.name).to eq(folder_name)
+  end
+
+  it "sets created_date" do
+    now = Time.now
+    builder.created_date(now)
+    expect(folder.created_date).to eq(now.strftime("%FT%T.%3NZ"))
+  end
+
+  it "sets updated_date" do
+    now = Time.now
+    builder.updated_date(now)
+    expect(folder.updated_date).to eq(now.strftime("%FT%T.%3NZ"))
   end
 end
