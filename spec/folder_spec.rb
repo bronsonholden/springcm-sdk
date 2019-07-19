@@ -26,5 +26,11 @@ RSpec.describe Springcm::Folder do
     test_valid_attribute :updated_by
     test_valid_attribute :description
     test_valid_attribute :browse_documents_url
+    test_valid_attribute :see?, true
+    test_valid_attribute :read?, true
+    test_valid_attribute :write?, true
+    test_valid_attribute :move?, true
+    test_valid_attribute :create?, true
+    test_valid_attribute :set_access?, true
   end
 end

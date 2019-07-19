@@ -10,6 +10,7 @@ class FolderBuilder
     @created_by = "folderbuilder@website.com"
     @updated_by = "folderbuilder@website.com"
     @description = "A folder"
+    @access = Set.new
   end
 
   def name(val)
@@ -50,6 +51,17 @@ class FolderBuilder
     self
   end
 
+  def access(*args)
+    allowed = Set[:see, :read, :write, :move, :create, :set_access]
+    new_access = Set[*args]
+    invalid = new_access - allowed
+    if invalid.size > 0
+      raise ArgumentError.new("Invalid access setting(s) #{invalid.inspect}")
+    end
+    @access = new_access
+    self
+  end
+
   def build
     nil if !valid?
     Springcm::Folder.new(data, @client)
@@ -71,12 +83,12 @@ class FolderBuilder
         "Description" => "#{@description}",
         "BrowseDocumentsUrl" => "https://uatna11.springcm.com/atlas/Link/Folder/0/#{@uid}",
         "AccessLevel" => {
-            "See" => true,
-            "Read" => true,
-            "Write" => true,
-            "Move" => true,
-            "Create" => true,
-            "SetAccess" => true
+            "See" => @access.include?(:see),
+            "Read" => @access.include?(:read),
+            "Write" => @access.include?(:write),
+            "Move" => @access.include?(:move),
+            "Create" => @access.include?(:create),
+            "SetAccess" => @access.include?(:set_access)
         },
         "Documents" => {
             "Href" => "#{@client.object_api_url}/folders/#{@uid}/documents"

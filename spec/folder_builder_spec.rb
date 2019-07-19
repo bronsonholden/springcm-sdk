@@ -54,4 +54,18 @@ RSpec.describe FolderBuilder do
     builder.description(description)
     expect(folder.description).to eq(description)
   end
+
+  it "sets access" do
+    builder.access(:see, :read)
+    expect(folder.see?).to eq(true)
+    expect(folder.read?).to eq(true)
+    expect(folder.write?).to eq(false)
+    expect(folder.move?).to eq(false)
+    expect(folder.create?).to eq(false)
+    expect(folder.set_access?).to eq(false)
+  end
+
+  it "disallows invalid access settings" do
+    expect { builder.access(:barrel_roll) }.to raise_error(ArgumentError)
+  end
 end
