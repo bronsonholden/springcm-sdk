@@ -35,6 +35,7 @@ module Springcm
       !!access_level.dig("SetAccess")
     end
 
+    # @return [String] The folder unique identifier (UID)
     def uid
       href[-36..-1]
     end
