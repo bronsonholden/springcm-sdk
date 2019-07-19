@@ -22,7 +22,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Connecting
+
+To begin using the SpringCM REST API, you must first acquire a client ID and
+secret pair. To do so, contact DocuSign Support and request a key pair for
+REST API usage. They require you to be a super administrator in the account
+before they will generate the key pair for you. For more information, see
+the [SpringCM REST API Guide].
+
+```ruby
+client = Springcm::Client.new(data_center: "uatna11", client_id: "<your client ID>", client_secret: "<your client secret>")
+client.connect
+client.authenticated?
+# ...
+```
+
+For more information, view the [documentation].
 
 ## Contributing
 
@@ -31,3 +46,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/paulho
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[SpringCM REST API Guide]: https://developer.springcm.com/guides/rest-api-guide
+
+[//]: # (TODO: Replace version tag below with vX.Y.Z)
+[documentation]: https://rubydoc.info/github/paulholden2/springcm-sdk/0.1.1
