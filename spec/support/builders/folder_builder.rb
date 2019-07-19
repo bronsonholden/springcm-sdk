@@ -71,8 +71,6 @@ class FolderBuilder
     !@uid.nil?
   end
 
-  private
-
   def data
     {
         "Name" => "#{@name}",
