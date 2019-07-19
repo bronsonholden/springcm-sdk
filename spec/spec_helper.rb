@@ -12,7 +12,17 @@ require "support/builders/folder_builder"
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
+module GlobalContext
+  extend RSpec::SharedContext
+
+  let(:data_center) { "uatna11" }
+  let(:client_id) { "client_id" }
+  let(:client_secret) { "client_secret" }
+end
+
 RSpec.configure do |config|
+  config.include GlobalContext
+
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
 

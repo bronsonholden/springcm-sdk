@@ -8,8 +8,6 @@ RSpec.describe Springcm::Client do
     end
   end
 
-  let(:client_id) { "client_id" }
-  let(:client_secret) { "client_secret" }
   let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
 
   test_valid_data_center "uatna11"
@@ -23,7 +21,6 @@ RSpec.describe Springcm::Client do
   end
 
   describe "object API URL helpers" do
-    let(:data_center) { "uatna11" }
     it "returns valid object URL" do
       expect(client.object_api_url).to eq("https://apiuatna11.springcm.com/v201411")
     end
@@ -37,7 +34,6 @@ RSpec.describe Springcm::Client do
 
   describe "auth URL helper" do
     context "UAT data center" do
-      let(:data_center) { "uatna11" }
       it "returns valid auth API URL" do
         expect(client.auth_url).to eq("https://authuat.springcm.com/api/v201606/apiuser")
       end
@@ -52,7 +48,6 @@ RSpec.describe Springcm::Client do
   end
 
   describe "authentication" do
-    let(:data_center) { "uatna11" }
     context "with valid credentials" do
       it "is successful" do
         client.connect
@@ -72,7 +67,6 @@ RSpec.describe Springcm::Client do
   end
 
   describe "folder usage" do
-    let(:data_center) { "uatna11" }
     let(:folder) { client.root_folder }
     it "retrieves root folder" do
       expect(folder).to be_a(Springcm::Folder)
