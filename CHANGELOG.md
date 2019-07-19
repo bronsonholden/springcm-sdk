@@ -3,6 +3,11 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Added
+* Folder object and API
+
+### Changed
+* Client no longer accepts credentials with keyword arguments
 
 ## [0.1.1] - 2019-07-17
 ### Added
