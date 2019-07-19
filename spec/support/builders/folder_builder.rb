@@ -79,16 +79,16 @@ class FolderBuilder
             "SetAccess" => true
         },
         "Documents" => {
-            "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}/documents"
+            "Href" => "#{@client.object_api_url}/folders/#{@uid}/documents"
         },
         "Folders" => {
-            "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}/folders"
+            "Href" => "#{@client.object_api_url}/folders/#{@uid}/folders"
         },
         "ShareLinks" => {
-            "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}/sharelinks"
+            "Href" => "#{@client.object_api_url}/folders/#{@uid}/sharelinks"
         },
-        "CreateDocumentHref" => "https://apiuploaduatna11.springcm.com/v201411/folders/#{@uid}/documents{?name}",
-        "Href" => "https://apiuatna11.springcm.com/v201411/folders/#{@uid}"
+        "CreateDocumentHref" => "#{@client.upload_api_url}/v201411/folders/#{@uid}/documents{?name}",
+        "Href" => "#{@client.object_api_url}/folders/#{@uid}"
     }
   end
 end
