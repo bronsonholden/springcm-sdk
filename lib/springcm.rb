@@ -17,7 +17,7 @@ module Springcm
 
   class InvalidClientIdOrSecretError < Error
     def initialize
-      super('Invalid Client Id or Client Secret')
+      super("Invalid Client Id or Client Secret")
     end
   end
 end
