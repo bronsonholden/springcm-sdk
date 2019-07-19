@@ -1,5 +1,5 @@
 RSpec.describe Springcm::Folder do
-  let(:client) { Springcm::Client.new(data_center: 'uatna11', client_id: 'client_id', client_secret: 'client_secret') }
+  let(:client) { Springcm::Client.new("uatna11", "client_id", "client_secret") }
   let(:data) { JSON.parse(File.open(File.dirname(__FILE__) + "/fixtures/root_folder.json", "rb").read) }
   let(:folder) { Springcm::Folder.new(data, client) }
 

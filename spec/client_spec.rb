@@ -10,7 +10,7 @@ RSpec.describe Springcm::Client do
 
   let(:client_id) { "client_id" }
   let(:client_secret) { "client_secret" }
-  let(:client) { Springcm::Client.new(data_center: data_center, client_id: client_id, client_secret: client_secret) }
+  let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
 
   test_valid_data_center "uatna11"
   test_valid_data_center "na11"

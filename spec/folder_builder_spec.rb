@@ -1,5 +1,5 @@
 RSpec.describe FolderBuilder do
-  let(:client) { Springcm::Client.new(data_center: 'uatna11', client_id: 'client_id', client_secret: 'client_secret') }
+  let(:client) { Springcm::Client.new("uatna11", "client_id", "client_secret") }
   let(:uid) { UUID.generate }
   let(:folder_name) { "My Folder" }
   let(:login_name) { "johndoe@email.com" }

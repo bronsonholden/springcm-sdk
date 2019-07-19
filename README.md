@@ -31,7 +31,7 @@ before they will generate the key pair for you. For more information, see
 the [SpringCM REST API Guide].
 
 ```ruby
-client = Springcm::Client.new(data_center: "uatna11", client_id: "<your client ID>", client_secret: "<your client secret>")
+client = Springcm::Client.new("uatna11", "<your client ID>", "<your client secret>")
 client.connect
 client.authenticated?
 # ...
