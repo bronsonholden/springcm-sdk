@@ -3,6 +3,7 @@ RSpec.describe FolderBuilder do
   let(:uid) { UUID.generate }
   let(:folder_name) { "My Folder" }
   let(:login_name) { "johndoe@email.com" }
+  let(:description) { "John's folder" }
   let(:builder) { FolderBuilder.new(client).uid(uid) }
   let(:folder) { builder.build }
 
@@ -47,5 +48,10 @@ RSpec.describe FolderBuilder do
   it "sets updated_by" do
     builder.updated_by(login_name)
     expect(folder.updated_by).to eq(login_name)
+  end
+
+  it "sets description" do
+    builder.description(description)
+    expect(folder.description).to eq(description)
   end
 end

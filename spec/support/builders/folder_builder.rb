@@ -9,6 +9,7 @@ class FolderBuilder
     @updated_date = Time.utc(2000, "jan", 1, 0, 0, 0)
     @created_by = "folderbuilder@website.com"
     @updated_by = "folderbuilder@website.com"
+    @description = "A folder"
   end
 
   def name(val)
@@ -44,6 +45,11 @@ class FolderBuilder
     self
   end
 
+  def description(val)
+    @description = val
+    self
+  end
+
   def build
     nil if !valid?
     Springcm::Folder.new(data, @client)
@@ -62,7 +68,7 @@ class FolderBuilder
         "CreatedBy" => "#{@created_by}",
         "UpdatedDate" => "#{@updated_date.strftime("%FT%T.%3NZ")}",
         "UpdatedBy" => "#{@updated_by}",
-        "Description" => "",
+        "Description" => "#{@description}",
         "BrowseDocumentsUrl" => "https://uatna11.springcm.com/atlas/Link/Folder/0/#{@uid}",
         "AccessLevel" => {
             "See" => true,
