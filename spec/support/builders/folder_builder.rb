@@ -64,7 +64,7 @@ class FolderBuilder
   def data
     {
         "Name" => "#{@name}",
-        "CreatedDate" => "#{@created_date.strftime("%FT%T.%3NZ")}", # 2000-01-01T00:00:00.000Z
+        "CreatedDate" => "#{@created_date.strftime("%FT%T.%3NZ")}",
         "CreatedBy" => "#{@created_by}",
         "UpdatedDate" => "#{@updated_date.strftime("%FT%T.%3NZ")}",
         "UpdatedBy" => "#{@updated_by}",
