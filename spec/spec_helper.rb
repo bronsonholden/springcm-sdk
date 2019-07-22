@@ -9,6 +9,7 @@ require "springcm"
 require "support/fake_springcm"
 require "support/fake_springcm_auth"
 require "support/builders/folder_builder"
+require "support/builders/page_builder"
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
