@@ -8,6 +8,7 @@ require "uuid"
 require "springcm"
 require "support/fake_springcm"
 require "support/fake_springcm_auth"
+require "support/builders/builder"
 require "support/builders/folder_builder"
 require "support/builders/page_builder"
 
