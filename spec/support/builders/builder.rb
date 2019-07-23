@@ -59,7 +59,7 @@ class Builder
   protected
 
   def properties
-    self.class.instance_variable_get(:@properties)
+    self.class.instance_variable_get(:@properties) || []
   end
 
   def property_keys
