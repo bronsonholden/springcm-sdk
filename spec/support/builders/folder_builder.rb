@@ -1,7 +1,20 @@
 require "springcm/folder"
+require_relative "mixins/uid"
+require_relative "mixins/name"
+require_relative "mixins/description"
+require_relative "mixins/created"
+require_relative "mixins/updated"
+require_relative "mixins/access"
 
 # Builds folder JSON for use in testing
 class FolderBuilder
+  include UidMixin
+  include NameMixin
+  include DescriptionMixin
+  include CreatedMixin
+  include UpdatedMixin
+  include AccessMixin
+
   def initialize(client)
     @client = client
     @name = "Folder"
@@ -11,55 +24,6 @@ class FolderBuilder
     @updated_by = "folderbuilder@website.com"
     @description = "A folder"
     @access = Set.new
-  end
-
-  def name(val)
-    @name = val
-    self
-  end
-
-  def uid(val)
-    raise ArgumentError.new("Invalid UID #{val}") if !UUID.validate(val)
-    @uid = val
-    self
-  end
-
-  def created_date(val)
-    raise ArgumentError.new("Invalid Time #{val.inspect}") if !val.is_a?(Time)
-    @created_date = val
-    self
-  end
-
-  def updated_date(val)
-    raise ArgumentError.new("Invalid Time #{val.inspect}") if !val.is_a?(Time)
-    @updated_date = val
-    self
-  end
-
-  def created_by(val)
-    @created_by = val
-    self
-  end
-
-  def updated_by(val)
-    @updated_by = val
-    self
-  end
-
-  def description(val)
-    @description = val
-    self
-  end
-
-  def access(*args)
-    allowed = Set[:see, :read, :write, :move, :create, :set_access]
-    new_access = Set[*args]
-    invalid = new_access - allowed
-    if invalid.size > 0
-      raise ArgumentError.new("Invalid access setting(s) #{invalid.inspect}")
-    end
-    @access = new_access
-    self
   end
 
   def build
