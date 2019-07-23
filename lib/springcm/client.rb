@@ -7,7 +7,7 @@ module Springcm
     # @param client_id [String] Your API client ID
     # @param client_secret [String] Your API client secret
     def initialize(data_center, client_id, client_secret)
-      if !["na11", "uatna11"].include?(data_center)
+      if !["na11", "uatna11", "eu11", "eu21", "na21", "us11"].include?(data_center)
         raise Springcm::ConnectionInfoError.new("Invalid data center '#{data_center.to_s}'")
       end
 
