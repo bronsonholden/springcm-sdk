@@ -25,7 +25,7 @@ module Springcm
     def connect(safe=true)
       conn = Faraday.new(url: auth_url)
       res = conn.post do |req|
-        req.url "/"
+        req.headers['Content-Type'] = 'application/json'
         req.body = {
           client_id: @client_id,
           client_secret: @client_secret
@@ -51,8 +51,9 @@ module Springcm
 
     def root_folder
       conn = Faraday.new(url: object_api_url)
+      conn.authorization('bearer', @access_token)
       res = conn.get do |req|
-        req.url "/folders"
+        req.url "folders"
         req.params["systemfolder"] = "root"
       end
       if res.success?

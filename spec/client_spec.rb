@@ -67,7 +67,12 @@ RSpec.describe Springcm::Client do
   end
 
   describe "folder usage" do
+    before(:each) do
+      client.connect!
+    end
+
     let(:folder) { client.root_folder }
+
     it "retrieves root folder" do
       expect(folder).to be_a(Springcm::Folder)
     end

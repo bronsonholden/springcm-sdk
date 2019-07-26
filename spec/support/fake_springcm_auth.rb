@@ -1,7 +1,7 @@
 require_relative "fake_service"
 
 class FakeSpringcmAuth < FakeService
-  post "/" do
+  post "/api/v201606/apiuser" do
     data = request_json
     client_id = data.fetch("client_id")
     client_secret = data.fetch("client_secret")
