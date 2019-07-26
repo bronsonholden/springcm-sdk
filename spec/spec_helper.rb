@@ -12,14 +12,18 @@ require "support/builders/builder"
 require "support/builders/folder_builder"
 require "support/builders/page_builder"
 
-WebMock.disable_net_connect!(allow_localhost: true)
+if ENV.key?("SPEC_SPRINGCM_LIVE")
+  WebMock.allow_net_connect!
+else
+  WebMock.disable_net_connect!(allow_localhost: true)
+end
 
 module GlobalContext
   extend RSpec::SharedContext
 
-  let(:data_center) { "uatna11" }
-  let(:client_id) { "client_id" }
-  let(:client_secret) { "client_secret" }
+  let(:data_center) { ENV["SPEC_SPRINGCM_DATA_CENTER"] || "uatna11" }
+  let(:client_id) { ENV["SPEC_SPRINGCM_CLIENT_ID"] || "client_id" }
+  let(:client_secret) { ENV["SPEC_SPRINGCM_CLIENT_SECRET"] || "client_secret" }
 end
 
 RSpec.configure do |config|
@@ -32,8 +36,10 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.before(:each) do
-    stub_request(:any, /api(download|upload)?(uat)?na11.*\.springcm\.com/).to_rack(FakeSpringcm)
-    stub_request(:any, /auth(uat)?\.springcm\.com/).to_rack(FakeSpringcmAuth)
+  if !ENV.key?("SPEC_SPRINGCM_LIVE")
+    config.before(:each) do
+      stub_request(:any, /api(download|upload)?(uat)?na11.*\.springcm\.com/).to_rack(FakeSpringcm)
+      stub_request(:any, /auth(uat)?\.springcm\.com/).to_rack(FakeSpringcmAuth)
+    end
   end
 end
