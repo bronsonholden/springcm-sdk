@@ -14,7 +14,7 @@ module Springcm
       if res.success?
         data = JSON.parse(res.body)
         items = data["Items"].map { |item|
-          Folder.new(item, self)
+          Folder.new(item, @client)
         }
         items
       else
