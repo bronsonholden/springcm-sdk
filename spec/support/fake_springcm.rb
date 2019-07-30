@@ -8,6 +8,14 @@ class FakeSpringcm < FakeService
     end
   end
 
+  get "/v201411/folders/:folder_uid/folders" do
+    builder = PageBuilder.new(client)
+    5.times do
+      builder.add(FolderBuilder.new(client).uid(UUID.generate))
+    end
+    json_response 200, builder.build.to_json
+  end
+
   private
 
   def client

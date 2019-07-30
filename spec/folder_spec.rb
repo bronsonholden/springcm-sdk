@@ -1,7 +1,8 @@
 RSpec.describe Springcm::Folder do
-  let(:client) { Springcm::Client.new("uatna11", "client_id", "client_secret") }
+  let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
   let(:data) { JSON.parse(File.open(File.dirname(__FILE__) + "/fixtures/root_folder.json", "rb").read) }
   let(:folder) { Springcm::Folder.new(data, client) }
+  let(:folders) { client.root_folder.folders }
 
   def self.test_valid_attribute(m, expected_value=nil)
     it "#{m.to_s} is retrieved" do
@@ -32,5 +33,15 @@ RSpec.describe Springcm::Folder do
     test_valid_attribute :move?, true
     test_valid_attribute :create?, true
     test_valid_attribute :set_access?, true
+  end
+
+  context "folder API" do
+    before(:each) do
+      client.connect!
+    end
+
+    it "retrieves subfolders" do
+      expect(folders).to all(be_a(Springcm::Folder))
+    end
   end
 end

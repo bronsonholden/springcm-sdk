@@ -3,6 +3,8 @@ require "springcm/folder"
 
 module Springcm
   class Client
+    attr_reader :access_token
+
     # @param data_center [String] Data center name, e.g. uatna11
     # @param client_id [String] Your API client ID
     # @param client_secret [String] Your API client secret
