@@ -51,6 +51,8 @@ module Springcm
       connect(false)
     end
 
+    # Retrieve the root folder in SpringCM
+    # @return [Springcm::Folder] The root folder object.
     def root_folder
       conn = Faraday.new(url: object_api_url)
       conn.authorization('bearer', @access_token)
