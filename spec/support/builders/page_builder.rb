@@ -81,6 +81,6 @@ class PageBuilder
     from = @offset
     to = from + @limit
     page_items = @items[from..to] || []
-    page_items.map { |builder| builder.build }
+    page_items.map { |builder| builder.data }
   end
 end

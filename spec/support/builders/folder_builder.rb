@@ -22,6 +22,13 @@ class FolderBuilder < Builder
     end
   }, collect: -> (*args) { Set[*args] }
 
+  property :parent, type: Springcm::Folder, validate: -> (*args) {
+    folder = args.first
+    if !folder.is_a?(Springcm::Folder)
+      raise ArgumentError.new("Invalid parent folder (must be a Springcm::Folder)")
+    end
+  }
+
   def initialize(client)
     super
   end
@@ -36,7 +43,7 @@ class FolderBuilder < Builder
   end
 
   def data
-    {
+    hash = {
         "Name" => "#{name}",
         "CreatedDate" => "#{created_date.strftime("%FT%T.%3NZ")}",
         "CreatedBy" => "#{created_by}",
@@ -64,5 +71,15 @@ class FolderBuilder < Builder
         "CreateDocumentHref" => "#{client.upload_api_url}/v201411/folders/#{uid}/documents{?name}",
         "Href" => "#{client.object_api_url}/folders/#{uid}"
     }
+
+    if !parent.nil?
+      hash.merge!({
+        "ParentFolder" => {
+          "Href" => parent.href
+        }
+      })
+    end
+
+    return hash
   end
 end

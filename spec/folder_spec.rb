@@ -43,5 +43,9 @@ RSpec.describe Springcm::Folder do
     it "retrieves subfolders" do
       expect(folders).to all(be_a(Springcm::Folder))
     end
+
+    it "retrieves parent folder" do
+      expect(folders.first.parent_folder).to be_a(Springcm::Folder)
+    end
   end
 end
