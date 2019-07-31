@@ -10,6 +10,7 @@ require "support/fake_springcm"
 require "support/fake_springcm_auth"
 require "support/builders/builder"
 require "support/builders/folder_builder"
+require "support/builders/document_builder"
 require "support/builders/page_builder"
 
 if ENV.key?("SPEC_SPRINGCM_LIVE")

@@ -23,6 +23,16 @@ class FakeSpringcm < FakeService
     json_response 200, builder.build.to_json
   end
 
+  get "/v201411/folders/:folder_uid/documents" do
+    builder = PageBuilder.new(client)
+    folder = FolderBuilder.new(client).build
+    5.times do
+      document = DocumentBuilder.new(client).uid(UUID.generate).parent(folder)
+      builder.add(document)
+    end
+    json_response 200, builder.build.to_json
+  end
+
   private
 
   def client

@@ -1,5 +1,6 @@
 require "faraday"
 require "springcm/folder"
+require "springcm/document"
 
 module Springcm
   class Client
