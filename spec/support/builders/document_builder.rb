@@ -50,42 +50,42 @@ class DocumentBuilder < Builder
       "Description" => "#{description}",
       "Description" => "Don't move. Used for REST API SDK tests!",
       "ParentFolder" => {
-          "Href" => "#{client.object_api_url}/folders/c0ca34aa-3774-e611-bb8d-6c3be5a75f4d"
+        "Href" => "#{client.object_api_url}/folders/c0ca34aa-3774-e611-bb8d-6c3be5a75f4d"
       },
       "HistoryItems" => {
-          "Href" => "#{client.object_api_url}/documents/0063805f-9b42-e811-9c12-3ca82a1e3f41/historyitems"
+        "Href" => "#{client.object_api_url}/documents/0063805f-9b42-e811-9c12-3ca82a1e3f41/historyitems"
       },
       "AccessLevel" => {
-          "See" => access.include?(:see),
-          "Read" => access.include?(:read),
-          "Write" => access.include?(:write),
-          "Move" => access.include?(:move),
-          "Create" => access.include?(:create),
-          "SetAccess" => access.include?(:set_access)
+        "See" => access.include?(:see),
+        "Read" => access.include?(:read),
+        "Write" => access.include?(:write),
+        "Move" => access.include?(:move),
+        "Create" => access.include?(:create),
+        "SetAccess" => access.include?(:set_access)
       },
       "PageCount" => page_count,
       "Lock" => {
-          "Href" => "#{client.object_api_url}/documents/#{uid}/lock"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/lock"
       },
       # TODO: Preview URLs
       "PreviewUrl" => "https://uatna11.springcm.com/atlas/documents/docexplorer?aid=0&id=#{uid}",
       "Versions" => {
-          "Href" => "#{client.object_api_url}/documents/#{uid}/versions"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/versions"
       },
       "ShareLinks" => {
-          "Href" => "#{client.object_api_url}/documents/#{uid}/sharelinks"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/sharelinks"
       },
       "DocumentProcessTrackingActivities" => {
-          "Href": "#{client.object_api_url}/documents/#{uid}/documentprocesstrackingactivities"
+        "Href": "#{client.object_api_url}/documents/#{uid}/documentprocesstrackingactivities"
       },
       "DocumentReminders" => {
-          "Href" => "#{client.object_api_url}/documents/#{uid}/documentreminders"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/documentreminders"
       },
       "RelatedDocuments" => {
-          "Href" => "#{client.object_api_url}/documents/#{uid}/relateddocuments"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/relateddocuments"
       },
       "WorkItems" => {
-          "Href" => "#{client.object_api_url}/documents/#{uid}/workitems"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/workitems"
       },
       "DownloadDocumentHref" => "#{client.download_api_url}/documents/#{uid}",
       "NativeFileSize" => 90580,
