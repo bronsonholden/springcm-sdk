@@ -48,7 +48,6 @@ class DocumentBuilder < Builder
       "UpdatedDate" => "#{updated_date.strftime("%FT%T.%3NZ")}",
       "UpdatedBy" => "#{updated_by}",
       "Description" => "#{description}",
-      "Description" => "Don't move. Used for REST API SDK tests!",
       "ParentFolder" => {
         "Href" => "#{client.object_api_url}/folders/c0ca34aa-3774-e611-bb8d-6c3be5a75f4d"
       },
