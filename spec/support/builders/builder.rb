@@ -31,7 +31,7 @@ class Builder
     val = collect.call(*args) if collect.respond_to?(:call)
 
     if !val.is_a?(prop[:type])
-      raise ArgumentError.new("Invalid property value #{val.inspect}")
+      raise ArgumentError.new("Invalid property value #{val.inspect}, must be: #{prop[:type]}")
     end
 
     # Set value
