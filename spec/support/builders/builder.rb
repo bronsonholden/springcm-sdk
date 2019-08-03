@@ -42,7 +42,7 @@ class Builder
   end
 
   def self.property(key, type: nil, default: nil, validate: nil, collect: nil)
-    if !default.nil?
+    if !default.nil? && type.nil?
       type = default.class
     end
 
