@@ -36,6 +36,13 @@ class DocumentBuilder < Builder
     end
   }
 
+  property :file_size, default: 1e6, type: Integer, validate: -> (*args) {
+    size = args.first
+    if !size.is_a?(Integer) || size < 1
+      raise ArgumentError.new("Invalid file size (must be a positive, non-zero Integer)")
+    end
+  }
+
   def build
     Springcm::Document.new(data, client)
   end
@@ -87,8 +94,8 @@ class DocumentBuilder < Builder
         "Href" => "#{client.object_api_url}/documents/#{uid}/workitems"
       },
       "DownloadDocumentHref" => "#{client.download_api_url}/documents/#{uid}",
-      "NativeFileSize" => 90580,
-      "PdfFileSize" => 90580,
+      "NativeFileSize" => file_size,
+      "PdfFileSize" => file_size,
       "Href" => "#{client.object_api_url}/documents/#{uid}"
     }
   end
