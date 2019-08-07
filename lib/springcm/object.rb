@@ -5,11 +5,6 @@ module Springcm
       @data = data
     end
 
-    # @return [String] The folder unique identifier (UID)
-    def uid
-      href[-36..-1]
-    end
-
     def method_missing(m, *args, &block)
       key = m.to_s.split("_").map(&:capitalize).join
       if @data.key?(key)

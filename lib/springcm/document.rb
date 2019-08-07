@@ -1,8 +1,8 @@
-require "springcm/object"
+require "springcm/resource"
 require "springcm/mixins/access_level"
 
 module Springcm
-  class Document < Object
+  class Document < Resource
     include Springcm::AccessLevel
   end
 end

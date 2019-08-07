@@ -1,10 +1,10 @@
-require "springcm/object"
+require "springcm/resource"
 require "springcm/mixins/access_level"
 require "springcm/mixins/parent_folder"
 require "springcm/mixins/documents"
 
 module Springcm
-  class Folder < Object
+  class Folder < Resource
     include Springcm::AccessLevel
     include Springcm::ParentFolder
     include Springcm::Documents

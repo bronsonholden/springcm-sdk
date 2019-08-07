@@ -1,4 +1,5 @@
 require "faraday"
+require "springcm/account"
 require "springcm/folder"
 require "springcm/document"
 
@@ -38,13 +39,35 @@ module Springcm
         data = JSON.parse(res.body)
         @access_token = data.fetch("access_token")
         @expiry = Time.now + data.fetch("expires_in")
-        true
       else
         @access_token = nil
         @expiry = nil
         raise Springcm::InvalidClientIdOrSecretError.new if !safe
+        return false
+      end
+    end
+
+    def get_account_info
+      conn = Faraday.new(url: object_api_url)
+      conn.authorization('bearer', @access_token)
+      res = conn.get do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.url "accounts/current"
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        @account = Springcm::Account.new(data, self)
+        true
+      else
         false
       end
+    end
+
+    def account
+      if @account.nil?
+        get_account_info
+      end
+      @account
     end
 
     # Shorthand for connecting unsafely
