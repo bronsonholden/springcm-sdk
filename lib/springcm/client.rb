@@ -48,8 +48,7 @@ module Springcm
     end
 
     def get_account_info
-      conn = Faraday.new(url: object_api_url)
-      conn.authorization('bearer', @access_token)
+      conn = authorized_connection(url: object_api_url)
       res = conn.get do |req|
         req.headers["Content-Type"] = "application/json"
         req.url "accounts/current"
@@ -78,8 +77,7 @@ module Springcm
     # Retrieve the root folder in SpringCM
     # @return [Springcm::Folder] The root folder object.
     def root_folder
-      conn = Faraday.new(url: object_api_url)
-      conn.authorization('bearer', @access_token)
+      conn = authorized_connection(url: object_api_url)
       res = conn.get do |req|
         req.url "folders"
         req.params["systemfolder"] = "root"
@@ -116,6 +114,21 @@ module Springcm
     # Get the URL for authentication requests
     def auth_url
       "https://auth#{auth_subdomain_suffix}.springcm.com/api/v#{@auth_version}/apiuser"
+    end
+
+    def authorized_connection(*options)
+      Faraday.new(*options) do |conn|
+        options = [{
+          max: 10,
+          interval: 1,
+          interval_randomness: 0.5,
+          backoff_factor: 2,
+          retry_statuses: [429]
+        }]
+        conn.request :retry, *options
+        conn.adapter :net_http
+        conn.authorization('bearer', @access_token)
+      end
     end
 
     private

@@ -10,8 +10,7 @@ module Springcm
     include Springcm::Documents
 
     def folders
-      conn = Faraday.new(url: @client.object_api_url)
-      conn.authorization('bearer', @client.access_token)
+      conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
         req.url "folders/#{uid}/folders"
       end
@@ -29,8 +28,7 @@ module Springcm
     def parent_folder
       uri = URI(parent_folder_href)
       url = "#{uri.scheme}://#{uri.host}"
-      conn = Faraday.new(url: url)
-      conn.authorization('bearer', @client.access_token)
+      conn = @client.authorized_connection(url: url)
       res = conn.get do |req|
         req.url uri.path
       end
@@ -45,8 +43,7 @@ module Springcm
     def documents
       uri = URI(documents_href)
       url = "#{uri.scheme}://#{uri.host}"
-      conn = Faraday.new(url: url)
-      conn.authorization('bearer', @client.access_token)
+      conn = @client.authorized_connection(url: url)
       res = conn.get do |req|
         req.url uri.path
       end
