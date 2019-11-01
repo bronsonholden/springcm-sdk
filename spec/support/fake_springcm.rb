@@ -10,6 +10,10 @@ class FakeSpringcm < FakeService
     if params["systemfolder"] == "root"
       builder = FolderBuilder.new(client).uid(UUID.generate)
       json_response 200, builder.data.to_json
+    elsif !params["path"].nil?
+      builder = FolderBuilder.new(client).uid(UUID.generate)
+      builder.name(params["path"].split("/").last)
+      json_response 200, builder.data.to_json
     end
   end
 

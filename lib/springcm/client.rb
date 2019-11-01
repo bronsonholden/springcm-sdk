@@ -90,6 +90,27 @@ module Springcm
       end
     end
 
+    def folder(hash = {})
+      if hash.keys.size != 1
+        raise ArgumentError.new("Specify exactly one of: path, uid")
+      end
+      conn = authorized_connection(url: object_api_url)
+      res = conn.get do |req|
+        if !hash[:path].nil?
+          req.url "folders"
+          req.params["path"] = hash[:path]
+        elsif !hash[:uid].nil?
+          req.url "folders/#{hash[:uid]}"
+        end
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        return Folder.new(data, self)
+      else
+        nil
+      end
+    end
+
     # Check if client is successfully authenticated
     # @return [Boolean] Whether a valid, unexpired access token is held.
     def authenticated?

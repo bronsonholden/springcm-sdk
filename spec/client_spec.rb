@@ -1,3 +1,5 @@
+require "uuid"
+
 RSpec.describe Springcm::Client do
   def self.test_valid_data_center(data_center)
     context data_center do
@@ -72,9 +74,28 @@ RSpec.describe Springcm::Client do
     end
 
     let(:folder) { client.root_folder }
+    let(:folder_by_path) { client.folder(path: "/Test Folder") }
+    let(:folder_by_uid) { client.folder(uid: UUID.generate) }
 
     it "retrieves root folder" do
       expect(folder).to be_a(Springcm::Folder)
+    end
+
+    it "retrieves folder by path" do
+      expect(folder_by_path).to be_a(Springcm::Folder)
+      expect(folder_by_path.name).to eq("Test Folder")
+    end
+
+    it "retrieves folder by UID" do
+      expect(folder_by_uid).to be_a(Springcm::Folder)
+    end
+
+    it "raises error on no #folder arguments" do
+      expect { client.folder }.to raise_error(ArgumentError)
+    end
+
+    it "raises error on more than one #folder argument" do
+      expect { client.folder(path: "/Test Folder", uid: UUID.generate) }.to raise_error(ArgumentError)
     end
   end
 end
