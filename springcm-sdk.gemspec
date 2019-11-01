@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
     spec.metadata["homepage_uri"] = spec.homepage
     spec.metadata["source_code_uri"] = "https://github.com/paulholden2/springcm-sdk"
-    spec.metadata["documentation_uri"] = "https://rubydoc.info/github/paulholden2/springcm-sdk/v#{Springcm::VERSION}"
+    spec.metadata["documentation_uri"] = "https://rubydoc.info/github/paulholden2/springcm-sdk/#{Springcm::VERSION}"
     spec.metadata["changelog_uri"] = "https://github.com/paulholden2/springcm-sdk/blob/master/CHANGELOG.md"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
