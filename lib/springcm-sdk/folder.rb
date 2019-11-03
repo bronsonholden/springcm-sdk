@@ -2,6 +2,7 @@ require "springcm-sdk/resource"
 require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/parent_folder"
 require "springcm-sdk/mixins/documents"
+require "springcm-sdk/helpers"
 
 module Springcm
   class Folder < Resource
@@ -9,7 +10,8 @@ module Springcm
     include Springcm::ParentFolder
     include Springcm::Documents
 
-    def folders
+    def folders(offset: 0, limit: 25)
+      Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
         req.url "folders/#{uid}/folders"
@@ -40,7 +42,8 @@ module Springcm
       end
     end
 
-    def documents
+    def documents(offset: 0, limit: 25)
+      Helpers.validate_offset_limit!(offset, limit)
       uri = URI(documents_href)
       url = "#{uri.scheme}://#{uri.host}"
       conn = @client.authorized_connection(url: url)
