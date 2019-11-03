@@ -1,4 +1,4 @@
-require "springcm/folder"
+require "springcm-sdk/folder"
 require_relative "builder"
 
 # Builds folder JSON for use in testing

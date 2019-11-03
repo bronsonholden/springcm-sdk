@@ -1,5 +1,5 @@
-require "springcm/document"
-require "springcm/folder"
+require "springcm-sdk/document"
+require "springcm-sdk/folder"
 require_relative "builder"
 
 class DocumentBuilder < Builder

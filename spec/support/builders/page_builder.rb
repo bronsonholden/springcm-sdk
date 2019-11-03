@@ -1,4 +1,4 @@
-require "springcm/folder"
+require "springcm-sdk/folder"
 
 class PageBuilder
   def initialize(client)

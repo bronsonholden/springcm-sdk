@@ -1,7 +1,7 @@
 require "faraday"
-require "springcm/account"
-require "springcm/folder"
-require "springcm/document"
+require "springcm-sdk/account"
+require "springcm-sdk/folder"
+require "springcm-sdk/document"
 
 module Springcm
   class Client

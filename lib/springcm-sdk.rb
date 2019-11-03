@@ -1,5 +1,5 @@
-require "springcm/version"
-require "springcm/client"
+require "springcm-sdk/version"
+require "springcm-sdk/client"
 
 module Springcm
   class Error < StandardError

@@ -1,7 +1,7 @@
-require "springcm/resource"
-require "springcm/mixins/access_level"
-require "springcm/mixins/parent_folder"
-require "springcm/mixins/documents"
+require "springcm-sdk/resource"
+require "springcm-sdk/mixins/access_level"
+require "springcm-sdk/mixins/parent_folder"
+require "springcm-sdk/mixins/documents"
 
 module Springcm
   class Folder < Resource

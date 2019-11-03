@@ -5,7 +5,7 @@ SimpleCov.start
 require "bundler/setup"
 require "webmock/rspec"
 require "uuid"
-require "springcm"
+require "springcm-sdk"
 require "support/fake_springcm"
 require "support/fake_springcm_auth"
 require "support/builders/builder"
