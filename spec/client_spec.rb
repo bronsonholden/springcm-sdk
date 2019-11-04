@@ -74,8 +74,8 @@ RSpec.describe Springcm::Client do
     end
 
     let(:folder) { client.root_folder }
-    let(:folder_by_path) { client.folder(path: "/Test Folder") }
-    let(:folder_by_uid) { client.folder(uid: UUID.generate) }
+    let(:folder_by_path) { client.folder(path: "/Users") }
+    let(:folder_by_uid) { client.folder(uid: client.root_folder.uid) }
 
     it "retrieves root folder" do
       expect(folder).to be_a(Springcm::Folder)
@@ -83,7 +83,7 @@ RSpec.describe Springcm::Client do
 
     it "retrieves folder by path" do
       expect(folder_by_path).to be_a(Springcm::Folder)
-      expect(folder_by_path.name).to eq("Test Folder")
+      expect(folder_by_path.name).to eq("Users")
     end
 
     it "retrieves folder by UID" do
