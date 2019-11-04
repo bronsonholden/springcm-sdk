@@ -25,7 +25,7 @@ class FakeSpringcm < FakeService
   get "/v201411/folders/:folder_uid/folders" do
     builder = PageBuilder.new(client)
     parent = FolderBuilder.new(client).build
-    5.times do
+    50.times do
       folder = FolderBuilder.new(client).uid(UUID.generate).parent(parent)
       builder.add(folder)
     end
