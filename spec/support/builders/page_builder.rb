@@ -1,10 +1,12 @@
 require "springcm-sdk/folder"
 
 class PageBuilder
-  def initialize(client)
+  def initialize(parent_folder, kind, client)
+    @parent_folder = parent_folder
+    @kind = kind
     @client = client
     # TODO: Require Href be set
-    @href = ""
+    @href = client.object_api_url
     @items = []
     @limit = 20
     @offset = 0
@@ -41,40 +43,79 @@ class PageBuilder
   end
 
   def build
-    # TODO: Require Href be set
-    {
+    data = {
       "Items" => paged_items,
-      "Href" => @href,
+      "Href" => current_href,
       "Offset" => @offset,
       "Limit" => @limit,
       "First" => first_href,
       "Last" => last_href,
       "Total" => total
     }
+    if has_next?
+      data["Next"] = next_href
+    end
+    if has_previous?
+      data["Previous"] = previous_href
+    end
+    return data
   end
 
   protected
+
+  def plural_resource_for_kind(kind)
+    if @kind == Springcm::Folder
+      return "folders"
+    elsif @kind == Springcm::Document
+      return "documents"
+    end
+  end
 
   def total
     @items.size
   end
 
-  def first_href
-    if total <= @limit
-      @href
-    else
-      # TODO: Add offset/limit params to returned Href
-      @href
+  def current_href
+    href_at(@offset, @limit)
+  end
+
+  def href_at(offset, limit)
+    offset = 0 if offset < 0
+    url = "#{@href}/folders/#{@parent_folder.uid}/#{plural_resource_for_kind(@kind)}"
+    if (offset != 0 || limit != 20)
+      url = "#{url}?offset=#{offset}&limit=#{limit}"
     end
+    url
+  end
+
+  def first_href
+    href_at(0, @limit)
   end
 
   def last_href
-    if total <= @limit
-      @href
-    else
-      # TODO: Add offset/limit params to returned Href
-      @href
-    end
+    pages = total / @limit
+    pages = pages.floor
+    href_at(pages * @limit, @limit)
+  end
+
+  def aligned_offset?
+    return (@offset % @limit) == 0
+  end
+
+  def has_next?
+    return aligned_offset? && @offset + @limit < total
+  end
+
+  def has_previous?
+    return aligned_offset? && @offset > 0
+  end
+
+  def next_href
+    return href_at(@offset + @limit, @limit)
+  end
+
+  def previous_href
+    return href_at(@offset - @limit, @limit)
   end
 
   def paged_items

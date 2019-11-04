@@ -1,4 +1,5 @@
 require "springcm-sdk/resource"
+require "springcm-sdk/resource_list"
 require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/parent_folder"
 require "springcm-sdk/mixins/documents"
@@ -15,13 +16,12 @@ module Springcm
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
         req.url "folders/#{uid}/folders"
+        req.params["offset"] = offset
+        req.params["limit"] = limit
       end
       if res.success?
         data = JSON.parse(res.body)
-        items = data["Items"].map { |item|
-          Folder.new(item, @client)
-        }
-        items
+        ResourceList.new(data, self, Folder, @client)
       else
         nil
       end
@@ -49,6 +49,8 @@ module Springcm
       conn = @client.authorized_connection(url: url)
       res = conn.get do |req|
         req.url uri.path
+        req.params["offset"] = offset
+        req.params["limit"] = limit
       end
       if res.success?
         data = JSON.parse(res.body)

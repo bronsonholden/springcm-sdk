@@ -23,7 +23,8 @@ class FakeSpringcm < FakeService
   end
 
   get "/v201411/folders/:folder_uid/folders" do
-    builder = PageBuilder.new(client)
+    parent_folder = FolderBuilder.new(client).uid(params["folder_uid"]).build
+    builder = PageBuilder.new(parent_folder, Springcm::Folder, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
     parent = FolderBuilder.new(client).build
     50.times do
       folder = FolderBuilder.new(client).uid(UUID.generate).parent(parent)
@@ -33,7 +34,8 @@ class FakeSpringcm < FakeService
   end
 
   get "/v201411/folders/:folder_uid/documents" do
-    builder = PageBuilder.new(client)
+    parent_folder = FolderBuilder.new(client).uid(params["folder_uid"]).build
+    builder = PageBuilder.new(parent_folder, Springcm::Document, client)
     folder = FolderBuilder.new(client).build
     5.times do
       document = DocumentBuilder.new(client).uid(UUID.generate).parent(folder)

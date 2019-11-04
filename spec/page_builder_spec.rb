@@ -1,6 +1,7 @@
 RSpec.describe PageBuilder do
   let(:client) { Springcm::Client.new("uatna11", "client_id", "client_secret") }
-  let(:builder) { PageBuilder.new(client).href("") }
+  let(:parent_folder) { FolderBuilder.new(client).uid(UUID.generate).build }
+  let(:builder) { PageBuilder.new(parent_folder, Springcm::Folder, client) }
   let(:paged) { builder.build }
 
   def self.test_invalid_property(prop, bad_value, description: nil)

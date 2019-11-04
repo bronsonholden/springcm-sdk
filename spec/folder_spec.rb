@@ -2,7 +2,11 @@ RSpec.describe Springcm::Folder do
   let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
   let(:data) { JSON.parse(File.open(File.dirname(__FILE__) + "/fixtures/root_folder.json", "rb").read) }
   let(:folder) { Springcm::Folder.new(data, client) }
-  let(:folders) { client.root_folder.folders }
+  let(:folder_list) { client.root_folder.folders }
+  let(:next_list) { folder_list.next }
+  let(:prev_list) { next_list.prev }
+  let(:first_list) { folder_list.first }
+  let(:last_list) { folder_list.last }
 
   def self.test_valid_attribute(m, expected_value=nil)
     it "#{m.to_s} is retrieved" do
@@ -40,12 +44,52 @@ RSpec.describe Springcm::Folder do
       client.connect!
     end
 
+    it "generates subfolder list" do
+      expect(folder_list).to be_a(Springcm::ResourceList)
+    end
+
     it "retrieves subfolders" do
-      expect(folders).to all(be_a(Springcm::Folder))
+      expect(folder_list.items).to all(be_a(Springcm::Folder))
     end
 
     it "retrieves parent folder" do
-      expect(folders.first.parent_folder).to be_a(Springcm::Folder)
+      expect(folder_list.items.first.parent_folder).to be_a(Springcm::Folder)
+    end
+
+    it "retrieves next set" do
+      expect(next_list).to be_a(Springcm::ResourceList)
+    end
+
+    it "retrieves next set of folders" do
+      expect(next_list.items).to all(be_a(Springcm::Folder))
+    end
+
+    it "retrieves empty previous set" do
+      expect(folder_list.prev).to be_nil
+    end
+
+    it "retrieves previous set" do
+      expect(prev_list).to be_a(Springcm::ResourceList)
+    end
+
+    it "retrieves previous set of folders" do
+      expect(prev_list.items).to all(be_a(Springcm::Folder))
+    end
+
+    it "retrieves first set" do
+      expect(first_list).to be_a(Springcm::ResourceList)
+    end
+
+    it "retrieves first set of folders" do
+      expect(first_list.items).to all(be_a(Springcm::Folder))
+    end
+
+    it "retrieves last set" do
+      expect(last_list).to be_a(Springcm::ResourceList)
+    end
+
+    it "retrieves last set of folders" do
+      expect(last_list.items).to all(be_a(Springcm::Folder))
     end
   end
 end
