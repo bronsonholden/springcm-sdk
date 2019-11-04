@@ -10,7 +10,7 @@ module Springcm
     include Springcm::ParentFolder
     include Springcm::Documents
 
-    def folders(offset: 0, limit: 25)
+    def folders(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
@@ -42,7 +42,7 @@ module Springcm
       end
     end
 
-    def documents(offset: 0, limit: 25)
+    def documents(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       uri = URI(documents_href)
       url = "#{uri.scheme}://#{uri.host}"
