@@ -5,16 +5,10 @@ class PageBuilder
     @parent_folder = parent_folder
     @kind = kind
     @client = client
-    # TODO: Require Href be set
     @href = client.object_api_url
     @items = []
     @limit = 20
     @offset = 0
-  end
-
-  def href(val)
-    @href = val
-    self
   end
 
   def limit(val)
