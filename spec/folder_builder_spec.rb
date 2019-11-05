@@ -68,4 +68,8 @@ RSpec.describe FolderBuilder do
   it "disallows invalid access settings" do
     expect { builder.access(:barrel_roll) }.to raise_error(ArgumentError)
   end
+
+  it "disallows invalid parent folder" do
+    expect { builder.parent(1) }.to raise_error(ArgumentError)
+  end
 end
