@@ -6,10 +6,6 @@ module Springcm
       super(data, client)
     end
 
-    def size
-      @items.size
-    end
-
     def next
       nav_list("Next")
     end
