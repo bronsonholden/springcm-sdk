@@ -52,6 +52,14 @@ RSpec.describe Springcm::Folder do
       expect(folder_list.items).to all(be_a(Springcm::Folder))
     end
 
+    it "retrieves requested set size" do
+      expect(client.root_folder.folders(limit: 5).items.size).to eq(5)
+    end
+
+    it "provides total item count" do
+      expect(folder_list.total).to be_a(Integer)
+    end
+
     it "retrieves parent folder" do
       expect(folder_list.items.first.parent_folder).to be_a(Springcm::Folder)
     end

@@ -97,5 +97,17 @@ RSpec.describe Springcm::Client do
     it "raises error on more than one #folder argument" do
       expect { client.folder(path: "/Test Folder", uid: UUID.generate) }.to raise_error(ArgumentError)
     end
+
+    it "raises error on invalid #folders offset" do
+      expect { folder.folders(offset: -1) }.to raise_error(ArgumentError)
+      expect { folder.folders(offset: "0") }.to raise_error(ArgumentError)
+      expect { folder.folders(offset: 1.2) }.to raise_error(ArgumentError)
+    end
+
+    it "raises error on invalid #folders limit" do
+      expect { folder.folders(limit: 0) }.to raise_error(ArgumentError)
+      expect { folder.folders(limit: -1) }.to raise_error(ArgumentError)
+      expect { folder.folders(limit: "2") }.to raise_error(ArgumentError)
+    end
   end
 end
