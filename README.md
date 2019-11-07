@@ -48,4 +48,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/paulho
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 [SpringCM REST API Guide]: https://developer.springcm.com/guides/rest-api-guide
-[documentation]: https://rubydoc.info/github/paulholden2/springcm-sdk/0.2.0
+[documentation]: https://rubydoc.info/github/paulholden2/springcm-sdk
