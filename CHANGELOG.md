@@ -40,7 +40,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Initial release to reserve gem name
 
-[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.0...HEAD
 [0.1.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.0
 [0.1.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.2
