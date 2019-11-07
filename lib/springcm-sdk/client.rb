@@ -90,17 +90,17 @@ module Springcm
       end
     end
 
-    def folder(hash = {})
-      if hash.keys.size != 1
+    def folder(path: nil, uid: nil)
+      if (path.nil? && uid.nil?) || (!path.nil? && !uid.nil?)
         raise ArgumentError.new("Specify exactly one of: path, uid")
       end
       conn = authorized_connection(url: object_api_url)
       res = conn.get do |req|
-        if !hash[:path].nil?
+        if !path.nil?
           req.url "folders"
-          req.params["path"] = hash[:path]
-        elsif !hash[:uid].nil?
-          req.url "folders/#{hash[:uid]}"
+          req.params["path"] = path
+        elsif !uid.nil?
+          req.url "folders/#{uid}"
         end
       end
       if res.success?
