@@ -54,10 +54,7 @@ module Springcm
       end
       if res.success?
         data = JSON.parse(res.body)
-        items = data["Items"].map { |item|
-          Document.new(item, @client)
-        }
-        items
+        ResourceList.new(data, self, Document, @client)
       else
         nil
       end
