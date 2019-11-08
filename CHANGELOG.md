@@ -4,6 +4,10 @@ All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.1]
+### Changed
+* Folder#documents now properly returns a ResourceList
+
 ## [0.3.0]
 ### Added
 * ResourceList class, for managing paged lists of e.g. Folders and Documents
@@ -40,9 +44,10 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Initial release to reserve gem name
 
-[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.1...HEAD
 [0.1.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.0
 [0.1.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.2
 [0.2.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.2.0
 [0.3.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.0
+[0.3.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.1
