@@ -1,14 +1,19 @@
 require_relative "fake_service"
 
 class FakeSpringcm < FakeService
+  def initialize
+    @root_uid = UUID.generate
+    super
+  end
+
   get "/v201411/accounts/current" do
     builder = AccountBuilder.new(client)
     json_response 200, builder.data.to_json
   end
 
   get "/v201411/folders" do
-    if params["systemfolder"] == "root"
-      builder = FolderBuilder.new(client).uid(UUID.generate)
+    if params["systemfolder"] == "root" || params["path"] == "/"
+      builder = FolderBuilder.new(client).uid(@root_uid)
       json_response 200, builder.data.to_json
     elsif !params["path"].nil?
       builder = FolderBuilder.new(client).uid(UUID.generate)

@@ -81,6 +81,10 @@ RSpec.describe Springcm::Client do
       expect(folder).to be_a(Springcm::Folder)
     end
 
+    it "retrieves root folder by path" do
+      expect(client.folder(path: "/").uid).to eq(folder.uid)
+    end
+
     it "retrieves folder by path" do
       expect(folder_by_path).to be_a(Springcm::Folder)
       expect(folder_by_path.name).to eq("Users")
