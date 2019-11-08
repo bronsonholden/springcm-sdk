@@ -9,7 +9,7 @@ RSpec.describe Springcm::Document do
     end
 
     it "retrieves documents" do
-      expect(documents).to all(be_a(Springcm::Document))
+      expect(documents.items).to all(be_a(Springcm::Document))
     end
   end
 end
