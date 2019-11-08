@@ -1,4 +1,5 @@
 require "faraday"
+require "json"
 require "springcm-sdk/account"
 require "springcm-sdk/folder"
 require "springcm-sdk/document"
