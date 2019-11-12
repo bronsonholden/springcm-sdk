@@ -95,6 +95,9 @@ module Springcm
       if (path.nil? && uid.nil?) || (!path.nil? && !uid.nil?)
         raise ArgumentError.new("Specify exactly one of: path, uid")
       end
+      if path == "/"
+        return root_folder
+      end
       conn = authorized_connection(url: object_api_url)
       res = conn.get do |req|
         if !path.nil?
