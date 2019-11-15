@@ -59,5 +59,18 @@ module Springcm
         nil
       end
     end
+
+    def delete
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.delete do |req|
+        req.url "folders/#{uid}"
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        self
+      else
+        nil
+      end
+    end
   end
 end

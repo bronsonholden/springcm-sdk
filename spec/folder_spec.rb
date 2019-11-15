@@ -44,6 +44,10 @@ RSpec.describe Springcm::Folder do
       client.connect!
     end
 
+    it "can be deleted" do
+      expect(folder.delete).to be_a(Springcm::Folder)
+    end
+
     it "generates subfolder list" do
       expect(folder_list).to be_a(Springcm::ResourceList)
     end

@@ -27,6 +27,11 @@ class FakeSpringcm < FakeService
     json_response 200, builder.data.to_json
   end
 
+  delete "/v201411/folders/:folder_uid" do
+    builder = FolderBuilder.new(client).uid(params[:folder_uid])
+    json_response 200, builder.data.to_json
+  end
+
   get "/v201411/folders/:folder_uid/folders" do
     parent_folder = FolderBuilder.new(client).uid(params["folder_uid"]).build
     builder = PageBuilder.new(parent_folder, Springcm::Folder, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
@@ -47,6 +52,11 @@ class FakeSpringcm < FakeService
       builder.add(document)
     end
     json_response 200, builder.build.to_json
+  end
+
+  delete "/v201411/documents/:document_uid" do
+    builder = DocumentBuilder.new(client).uid(params[:document_uid])
+    json_response 200, builder.data.to_json
   end
 
   private
