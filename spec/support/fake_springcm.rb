@@ -19,6 +19,12 @@ class FakeSpringcm < FakeService
       builder = FolderBuilder.new(client).uid(UUID.generate)
       builder.name(params["path"].split("/").last)
       json_response 200, builder.data.to_json
+    else
+      # Stub the validation errors
+      json_response 422, {
+        "Error" => {},
+        "ValidationErrors" => []
+      }
     end
   end
 
