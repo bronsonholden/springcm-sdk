@@ -13,6 +13,10 @@ RSpec.describe Springcm::Document do
       expect(document.delete).to be_a(Springcm::Document)
     end
 
+    it "has attributes" do
+      expect(document.attribute_groups).to be_a(Hash)
+    end
+
     it "retrieves documents" do
       expect(documents.items).to all(be_a(Springcm::Document))
     end

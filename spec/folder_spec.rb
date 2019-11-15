@@ -51,6 +51,10 @@ RSpec.describe Springcm::Folder do
       expect(folder.delete).to be_a(Springcm::Folder)
     end
 
+    it "has attributes" do
+      expect(folder.attribute_groups).to be_a(Hash)
+    end
+
     it "generates subfolder list" do
       expect(folder_list).to be_a(Springcm::ResourceList)
     end

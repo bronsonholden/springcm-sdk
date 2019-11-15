@@ -9,6 +9,7 @@ module Springcm
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.delete do |req|
         req.url "documents/#{uid}"
+        req.params["expand"] = "attributegroups"
       end
       if res.success?
         data = JSON.parse(res.body)

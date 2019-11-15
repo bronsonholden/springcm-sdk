@@ -59,6 +59,7 @@ class FolderBuilder < Builder
         "Create" => access.include?(:create),
         "SetAccess" => access.include?(:set_access)
       },
+      "AttributeGroups" => {}, # TODO: Allow building attributes
       "Documents" => {
         "Href" => "#{client.object_api_url}/folders/#{uid}/documents"
       },

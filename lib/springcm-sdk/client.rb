@@ -106,6 +106,7 @@ module Springcm
         elsif !uid.nil?
           req.url "folders/#{uid}"
         end
+        req.params["expand"] = "attributegroups"
       end
       if res.success?
         data = JSON.parse(res.body)
@@ -127,6 +128,7 @@ module Springcm
         elsif !uid.nil?
           req.url "documents/#{uid}"
         end
+        req.params["expand"] = "attributegroups"
       end
       if res.success?
         data = JSON.parse(res.body)

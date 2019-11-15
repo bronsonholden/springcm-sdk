@@ -33,6 +33,7 @@ module Springcm
       conn = @client.authorized_connection(url: url)
       res = conn.get do |req|
         req.url uri.path
+        req.params["expand"] = "attributegroups"
       end
       if res.success?
         data = JSON.parse(res.body)

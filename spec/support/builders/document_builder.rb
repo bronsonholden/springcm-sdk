@@ -69,6 +69,7 @@ class DocumentBuilder < Builder
         "Create" => access.include?(:create),
         "SetAccess" => access.include?(:set_access)
       },
+      "AttributeGroups" => {}, # TODO: Allow building attributes
       "PageCount" => page_count,
       "Lock" => {
         "Href" => "#{client.object_api_url}/documents/#{uid}/lock"
