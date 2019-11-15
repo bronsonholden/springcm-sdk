@@ -1,7 +1,6 @@
 RSpec.describe Springcm::Folder do
   let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
-  let(:data) { JSON.parse(File.open(File.dirname(__FILE__) + "/fixtures/root_folder.json", "rb").read) }
-  let(:folder) { Springcm::Folder.new(data, client) }
+  let(:folder) { client.root_folder }
   let(:folder_list) { client.root_folder.folders }
   let(:next_list) { folder_list.next }
   let(:prev_list) { next_list.prev }
@@ -20,11 +19,15 @@ RSpec.describe Springcm::Folder do
   end
 
   context "attribute methods" do
+    before(:each) do
+      client.connect!
+    end
+
     it "falls back to method_missing" do
       expect { folder.not_an_attribute_or_method }.to raise_error(NoMethodError)
     end
 
-    test_valid_attribute :name, "Fake SpringCM Account"
+    test_valid_attribute :name, "Folder"
     test_valid_attribute :created_date
     test_valid_attribute :created_by
     test_valid_attribute :updated_date

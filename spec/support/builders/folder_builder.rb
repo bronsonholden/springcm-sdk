@@ -13,7 +13,7 @@ class FolderBuilder < Builder
   property :updated_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
   property :created_by, default: "FolderBuilder"
   property :updated_by, default: "FolderBuilder"
-  property :access, default: Set.new, validate: -> (*args) {
+  property :access, default: Set[:see, :read, :write, :move, :create, :set_access], validate: -> (*args) {
     allowed = Set[:see, :read, :write, :move, :create, :set_access]
     new_access = Set[*args]
     invalid = new_access - allowed
