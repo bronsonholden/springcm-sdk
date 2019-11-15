@@ -114,4 +114,22 @@ RSpec.describe Springcm::Client do
       expect { folder.folders(limit: "2") }.to raise_error(ArgumentError)
     end
   end
+
+  describe "document usage" do
+    before(:each) do
+      client.connect!
+    end
+
+    let(:uid) { UUID.generate }
+    let(:document_by_uid) { client.document(uid: uid) }
+    let(:document_by_path) { client.document(path: "/Test.pdf") }
+
+    it "retrieves document by UID" do
+      expect(document_by_uid).to be_a(Springcm::Document)
+    end
+
+    it "retrieves document by path" do
+      expect(document_by_path).to be_a(Springcm::Document)
+    end
+  end
 end

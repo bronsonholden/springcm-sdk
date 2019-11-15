@@ -115,6 +115,27 @@ module Springcm
       end
     end
 
+    def document(path: nil, uid: nil)
+      if (path.nil? && uid.nil?) || (!path.nil? && !uid.nil?)
+        raise ArgumentError.new("Specify exactly one of: path, uid")
+      end
+      conn = authorized_connection(url: object_api_url)
+      res = conn.get do |req|
+        if !path.nil?
+          req.url "documents"
+          req.params["path"] = path
+        elsif !uid.nil?
+          req.url "documents/#{uid}"
+        end
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        return Document.new(data, self)
+      else
+        nil
+      end
+    end
+
     # Check if client is successfully authenticated
     # @return [Boolean] Whether a valid, unexpired access token is held.
     def authenticated?

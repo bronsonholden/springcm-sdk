@@ -60,6 +60,23 @@ class FakeSpringcm < FakeService
     json_response 200, builder.build.to_json
   end
 
+  get "/v201411/documents" do
+    if !params["path"].nil?
+      builder = DocumentBuilder.new(client).name(File.basename(params["path"]))
+      json_response 200, builder.data.to_json
+    else
+      # SpringCM returns 404 instead of a validation error. Weird.
+      json_response 404, {
+        "Message" => "No HTTP resource was found that matches the request URI '#{request.url}'"
+      }
+    end
+  end
+
+  get "/v201411/documents/:document_uid" do
+    builder = DocumentBuilder.new(client).uid(params[:document_uid])
+    json_response 200, builder.data.to_json
+  end
+
   delete "/v201411/documents/:document_uid" do
     builder = DocumentBuilder.new(client).uid(params[:document_uid])
     json_response 200, builder.data.to_json

@@ -6,6 +6,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Folder#delete
 * Document#delete
+* Client#document (by path or UID)
 
 ## [0.3.3] - 2019-11-12
 ### Changed
