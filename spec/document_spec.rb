@@ -9,6 +9,10 @@ RSpec.describe Springcm::Document do
       client.connect!
     end
 
+    it "can be reloaded" do
+      expect(document.reload).to be_a(Springcm::Document)
+    end
+
     it "can be deleted" do
       expect(document.delete).to be_a(Springcm::Document)
     end

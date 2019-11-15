@@ -11,6 +11,20 @@ module Springcm
     include Springcm::ParentFolder
     include Springcm::Documents
 
+    def reload
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.get do |req|
+        req.url "folders/#{uid}"
+        req.params["expand"] = "attributegroups"
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        Folder.new(data, @client)
+      else
+        nil
+      end
+    end
+
     def folders(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)

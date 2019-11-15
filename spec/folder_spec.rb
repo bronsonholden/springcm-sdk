@@ -47,6 +47,10 @@ RSpec.describe Springcm::Folder do
       client.connect!
     end
 
+    it "can be reloaded" do
+      expect(folder.reload).to be_a(Springcm::Folder)
+    end
+
     it "can be deleted" do
       expect(folder.delete).to be_a(Springcm::Folder)
     end
