@@ -11,7 +11,7 @@ module Springcm
     include Springcm::ParentFolder
     include Springcm::Documents
 
-    def resource_params
+    def self.resource_params
       {
         "expand" => "attributegroups"
       }

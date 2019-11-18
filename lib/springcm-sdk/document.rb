@@ -5,7 +5,7 @@ module Springcm
   class Document < Resource
     include Springcm::AccessLevel
 
-    def resource_params
+    def self.resource_params
       {
         "expand" => "attributegroups"
       }
