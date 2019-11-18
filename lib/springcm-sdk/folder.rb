@@ -76,7 +76,7 @@ module Springcm
       end
       if res.success?
         data = JSON.parse(res.body)
-        self
+        reload
       else
         nil
       end
