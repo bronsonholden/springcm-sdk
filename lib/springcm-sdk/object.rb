@@ -13,5 +13,9 @@ module Springcm
         super
       end
     end
+
+    def raw
+      @data
+    end
   end
 end

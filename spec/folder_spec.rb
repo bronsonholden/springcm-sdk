@@ -6,6 +6,7 @@ RSpec.describe Springcm::Folder do
   let(:prev_list) { next_list.prev }
   let(:first_list) { folder_list.first }
   let(:last_list) { folder_list.last }
+  let(:garbo) { client.folder(uid: "a8765e66-280a-ea11-b808-48df378a7098") }
 
   def self.test_valid_attribute(m, expected_value=nil)
     it "#{m.to_s} is retrieved" do
@@ -52,7 +53,11 @@ RSpec.describe Springcm::Folder do
     end
 
     it "can be deleted" do
-      expect(folder.delete).to be_a(Springcm::Folder)
+      expect(garbo.delete).to be_a(Springcm::Folder)
+    end
+
+    it "can be moved" do
+      expect(garbo.move("/")).to be_a(Springcm::Folder)
     end
 
     it "has attributes" do

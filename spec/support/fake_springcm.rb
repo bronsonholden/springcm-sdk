@@ -33,6 +33,11 @@ class FakeSpringcm < FakeService
     json_response 200, builder.data.to_json
   end
 
+  patch "/v201411/folders/:folder_uid" do
+    builder = FolderBuilder.new(client).uid(params[:folder_uid])
+    json_response 200, builder.data.to_json
+  end
+
   delete "/v201411/folders/:folder_uid" do
     builder = FolderBuilder.new(client).uid(params[:folder_uid])
     json_response 200, builder.data.to_json
