@@ -17,25 +17,6 @@ module Springcm
       }
     end
 
-    def move(path)
-      parent = @client.folder(path: path)
-      body = {
-        "ParentFolder" => parent.raw
-      }
-      conn = @client.authorized_connection(url: @client.object_api_url)
-      res = conn.patch do |req|
-        req.headers["Content-Type"] = "application/json"
-        req.url resource_uri
-        req.body = body.to_json
-      end
-      if res.success?
-        data = JSON.parse(res.body)
-        Folder.new(data, @client)
-      else
-        nil
-      end
-    end
-
     def folders(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)

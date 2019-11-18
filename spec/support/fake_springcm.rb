@@ -82,6 +82,11 @@ class FakeSpringcm < FakeService
     json_response 200, builder.data.to_json
   end
 
+  patch "/v201411/documents/:document_uid" do
+    builder = DocumentBuilder.new(client).uid(params[:document_uid])
+    json_response 200, builder.data.to_json
+  end
+
   delete "/v201411/documents/:document_uid" do
     builder = DocumentBuilder.new(client).uid(params[:document_uid])
     json_response 200, builder.data.to_json
