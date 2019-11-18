@@ -57,7 +57,7 @@ RSpec.describe Springcm::Folder do
     end
 
     it "can be moved" do
-      expect(garbo.move("/")).to be_a(Springcm::Folder)
+      expect(garbo.move(path: "/")).to be_a(Springcm::Folder)
     end
 
     it "has attributes" do

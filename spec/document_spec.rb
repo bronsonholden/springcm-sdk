@@ -19,7 +19,7 @@ RSpec.describe Springcm::Document do
     end
 
     it "can be moved" do
-      expect(trashy.move("/")).to be_a(Springcm::Document)
+      expect(trashy.move(path: "/")).to be_a(Springcm::Document)
     end
 
     it "has attributes" do

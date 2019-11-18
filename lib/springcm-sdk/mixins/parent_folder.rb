@@ -5,8 +5,8 @@ module Springcm
       @data.dig("ParentFolder", "Href")
     end
 
-    def move(path)
-      parent = @client.folder(path: path)
+    def move(path: nil, uid: nil)
+      parent = @client.folder(path: path, uid: uid)
       body = {
         "ParentFolder" => parent.raw
       }
