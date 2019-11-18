@@ -14,7 +14,7 @@ module Springcm
     def reload
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
-        req.url "folders/#{uid}"
+        req.url resource_uri
         req.params["expand"] = "attributegroups"
       end
       if res.success?
@@ -29,7 +29,7 @@ module Springcm
       Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
-        req.url "folders/#{uid}/folders"
+        req.url "#{resource_uri}/folders"
         req.params["offset"] = offset
         req.params["limit"] = limit
       end
@@ -78,7 +78,7 @@ module Springcm
     def delete
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.delete do |req|
-        req.url "folders/#{uid}"
+        req.url resource_uri
       end
       if res.success?
         data = JSON.parse(res.body)
