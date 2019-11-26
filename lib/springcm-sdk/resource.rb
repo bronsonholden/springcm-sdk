@@ -1,12 +1,14 @@
 require "springcm-sdk/object"
 
 module Springcm
+  # A Resource is a SpringCM object that has an auto-assigned GUID.
   class Resource < Object
     # @return [String] The object's unique identifier (UID)
     def uid
       href[-36..-1]
     end
 
+    # Resend a request to the API for this resource and return a new instance.
     def reload
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
@@ -23,6 +25,7 @@ module Springcm
       end
     end
 
+    # Send a DELETE request for this resource.
     def delete
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.delete do |req|
