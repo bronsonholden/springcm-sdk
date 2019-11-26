@@ -36,6 +36,8 @@ module Springcm
       end
     end
 
+    # Retrieve the URI for this resource (relative to the base object API
+    # URL).
     def resource_uri
       "#{resource_name}/#{uid}"
     end
