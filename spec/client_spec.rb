@@ -15,6 +15,15 @@ RSpec.describe Springcm::Client do
   test_valid_data_center "uatna11"
   test_valid_data_center "na11"
 
+  it "retries on 429" do
+    client.connect!
+    conn = client.authorized_connection(url: client.object_api_url)
+    res = conn.get do |req|
+      req.url "ratelimit"
+    end
+    expect(res.success?).to eq(true)
+  end
+
   context "with invalid data center" do
     let(:data_center) { "narnia" }
     it "raises connection info error" do

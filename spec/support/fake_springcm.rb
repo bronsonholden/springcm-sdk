@@ -1,9 +1,21 @@
 require_relative "fake_service"
 
 class FakeSpringcm < FakeService
+  @@ratelimit = true
+
   def initialize
     @root_uid = UUID.generate
+    @ratelimit = true
     super
+  end
+
+  get "/v201411/ratelimit" do
+    if @@ratelimit
+      @@ratelimit = false
+      json_response 429, {}
+    else
+      json_response 200, {}
+    end
   end
 
   get "/v201411/accounts/current" do
