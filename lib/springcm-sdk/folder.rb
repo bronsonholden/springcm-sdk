@@ -7,9 +7,9 @@ require "springcm-sdk/helpers"
 
 module Springcm
   class Folder < Resource
-    include Springcm::AccessLevel
-    include Springcm::ParentFolder
-    include Springcm::Documents
+    include Springcm::Mixins::AccessLevel
+    include Springcm::Mixins::ParentFolder
+    include Springcm::Mixins::Documents
 
     def self.resource_params
       {

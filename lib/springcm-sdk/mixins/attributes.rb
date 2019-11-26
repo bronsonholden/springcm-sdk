@@ -1,4 +1,6 @@
 module Springcm
-  module Attributes
+  module Mixins
+    module Attributes
+    end
   end
 end
