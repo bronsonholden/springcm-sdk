@@ -2,7 +2,7 @@ require "springcm-sdk/object"
 
 module Springcm
   class Resource < Object
-    # @return [String] The folder unique identifier (UID)
+    # @return [String] The object's unique identifier (UID)
     def uid
       href[-36..-1]
     end
