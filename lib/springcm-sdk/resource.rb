@@ -10,6 +10,11 @@ module Springcm
 
     # Resend a request to the API for this resource and return a new instance.
     def reload
+      get
+    end
+
+    # Send a GET request for this resource.
+    def get
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
         req.url resource_uri
