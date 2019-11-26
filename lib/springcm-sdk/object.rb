@@ -5,9 +5,11 @@ module Springcm
       @data = data
     end
 
+    # Retrieve a top-level property of the object's JSON data.
+    #
     # For convenience, top-level properties of a SpringCM object's JSON data
     # are accessible via instance methods (underscore format), e.g.
-    # attribute_groups to retrieve JSON for $.AttributeGroups. This can and
+    # attribute_groups to retrieve JSON for $.AttributeGroups. This can be and
     # is often overridden by inheriting classes by defining a method and
     # extending what it does. Some mixins also provide convenience methods
     # for retrieving data deeper in the JSON document, e.g. documents_href
