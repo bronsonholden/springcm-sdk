@@ -1,7 +1,7 @@
 module Springcm
   class ResourceList < Object
-    def initialize(data, parent_folder, kind, client)
-      @parent_folder = parent_folder
+    def initialize(data, parent_object, kind, client)
+      @parent_object = parent_object
       @kind = kind
       super(data, client)
     end
@@ -38,7 +38,7 @@ module Springcm
       query = CGI.parse(uri.query || "")
       offset = query.fetch("offset", ["0"]).first.to_i
       limit = query.fetch("limit", ["20"]).first.to_i
-      @parent_folder.send(method, offset: offset, limit: limit)
+      @parent_object.send(method, offset: offset, limit: limit)
     end
 
     def method_for_kind!(kind)
@@ -47,8 +47,10 @@ module Springcm
         method = :folders
       elsif kind == Springcm::Document
         method = :documents
+      elsif kind == Springcm::AttributeGroup
+        method = :attribute_groups
       else
-        raise ArgumentError.new("Resource kind must be one of: Springcm::Document, Springcm::Folder.")
+        raise ArgumentError.new("Resource kind must be one of: Springcm::Document, Springcm::Folder, Springcm::AttributeGroup.")
       end
       return method
     end

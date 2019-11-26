@@ -1,11 +1,10 @@
 require "springcm-sdk/folder"
 
 class PageBuilder
-  def initialize(parent_folder, kind, client)
-    @parent_folder = parent_folder
+  def initialize(base_href, kind, client)
     @kind = kind
     @client = client
-    @href = client.object_api_url
+    @base_href = base_href
     @items = []
     @limit = 20
     @offset = 0
@@ -62,6 +61,8 @@ class PageBuilder
       return "folders"
     elsif @kind == Springcm::Document
       return "documents"
+    elsif @kind == Springcm::AttributeGroup
+      return "attributegroups"
     end
   end
 
@@ -75,7 +76,7 @@ class PageBuilder
 
   def href_at(offset, limit)
     offset = 0 if offset < 0
-    url = "#{@href}/folders/#{@parent_folder.uid}/#{plural_resource_for_kind(@kind)}"
+    url = "#{@base_href}/#{plural_resource_for_kind(@kind)}"
     if (offset != 0 || limit != 20)
       url = "#{url}?offset=#{offset}&limit=#{limit}"
     end
@@ -87,9 +88,13 @@ class PageBuilder
   end
 
   def last_href
-    pages = total / @limit
-    pages = pages.floor
-    href_at(pages * @limit, @limit)
+    if @limit >= total
+      current_href
+    else
+      pages = total / @limit
+      pages = pages.floor
+      href_at((pages - 1) * @limit, @limit)
+    end
   end
 
   def aligned_offset?

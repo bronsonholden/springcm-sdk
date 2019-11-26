@@ -13,6 +13,7 @@ require "support/builders/account_builder"
 require "support/builders/folder_builder"
 require "support/builders/document_builder"
 require "support/builders/page_builder"
+require "support/builders/attribute_group_builder"
 
 if ENV.key?("SPEC_SPRINGCM_LIVE")
   WebMock.allow_net_connect!

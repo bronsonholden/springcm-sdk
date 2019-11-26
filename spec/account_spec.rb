@@ -9,4 +9,8 @@ RSpec.describe Springcm::Account do
   it "loads account info" do
     expect(client.account.id).to be_a(String)
   end
+
+  it "loads attribute groups" do
+    expect(client.account.attribute_groups.items).to all(be_a(Springcm::AttributeGroup))
+  end
 end

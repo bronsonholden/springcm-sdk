@@ -9,6 +9,14 @@ All notable changes to springcm-sdk will be documented in this file.
 * Client#document (by path or UID)
 * Folder#move (by destination folder path or UID)
 * Document#move (by destination folder path or UID)
+* Account#attribute_groups
+
+### Changed
+* Tweaked PageBuilder to support items that don't have a parent folder.
+  Instead uses a base HREF to build next/prev/first/last HREFs. Similarly
+  modified ResourceBuilder to reference a parent object instead of a parent
+  folder. Outside of folders/documents, this parent object will simply be
+  the Account.
 
 ## [0.3.3] - 2019-11-12
 ### Changed

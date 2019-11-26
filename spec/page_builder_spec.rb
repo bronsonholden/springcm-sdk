@@ -1,7 +1,7 @@
 RSpec.describe PageBuilder do
   let(:client) { Springcm::Client.new("uatna11", "client_id", "client_secret") }
   let(:parent_folder) { FolderBuilder.new(client).uid(UUID.generate).build }
-  let(:builder) { PageBuilder.new(parent_folder, Springcm::Folder, client) }
+  let(:builder) { PageBuilder.new(parent_folder.href, Springcm::Folder, client) }
   let(:paged) { builder.build }
 
   def self.test_invalid_property(prop, bad_value, description: nil)
@@ -29,9 +29,11 @@ RSpec.describe PageBuilder do
 
   context "with folder" do
     it "creates complete page" do
-      n = 20
+      n = 60
+      limit = 20
+      builder.limit(limit)
       n.times { builder.add(FolderBuilder.new(client).uid(UUID.generate)) }
-      expect(paged["Items"].size).to eq(n)
+      expect(paged["Items"].size).to eq(limit)
       # TODO: Test Href excludes paging params
     end
 

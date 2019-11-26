@@ -11,6 +11,16 @@ class FakeSpringcm < FakeService
     json_response 200, builder.data.to_json
   end
 
+  get "/v201411/accounts/current/attributegroups" do
+    account = AccountBuilder.new(client)
+    builder = PageBuilder.new("#{account.build.href}/attributegroups", Springcm::AttributeGroup, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.times do
+      attribute_group = AttributeGroupBuilder.new(client)
+      builder.add(attribute_group)
+    end
+    json_response 200, builder.build.to_json
+  end
+
   get "/v201411/folders" do
     if params["systemfolder"] == "root" || params["path"] == "/"
       builder = FolderBuilder.new(client).uid(@root_uid)
@@ -45,7 +55,7 @@ class FakeSpringcm < FakeService
 
   get "/v201411/folders/:folder_uid/folders" do
     parent_folder = FolderBuilder.new(client).uid(params["folder_uid"]).build
-    builder = PageBuilder.new(parent_folder, Springcm::Folder, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    builder = PageBuilder.new(parent_folder.href, Springcm::Folder, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
     parent = FolderBuilder.new(client).build
     50.times do
       folder = FolderBuilder.new(client).uid(UUID.generate).parent(parent)
@@ -56,7 +66,7 @@ class FakeSpringcm < FakeService
 
   get "/v201411/folders/:folder_uid/documents" do
     parent_folder = FolderBuilder.new(client).uid(params["folder_uid"]).build
-    builder = PageBuilder.new(parent_folder, Springcm::Document, client)
+    builder = PageBuilder.new(parent_folder.href, Springcm::Document, client)
     folder = FolderBuilder.new(client).build
     5.times do
       document = DocumentBuilder.new(client).uid(UUID.generate).parent(folder)
