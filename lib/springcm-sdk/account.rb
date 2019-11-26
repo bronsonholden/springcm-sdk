@@ -8,6 +8,9 @@ module Springcm
       @all_attribute_groups = nil
     end
 
+    # Retrieve all attribute groups for this account. Calls #attribute_groups
+    # and concatenates results to a cache that is returned from future calls
+    # to #all_attribute_groups.
     def all_attribute_groups
       if @all_attribute_groups.nil?
         load_all_attribute_groups
@@ -15,6 +18,9 @@ module Springcm
       @all_attribute_groups
     end
 
+    # Retrieve a page of attribute groups in this account. In most cases,
+    # you can call #all_attribute_groups instead, as attribute group
+    # configurations do not frequently change.
     def attribute_groups(offset: 0, limit: 20)
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|

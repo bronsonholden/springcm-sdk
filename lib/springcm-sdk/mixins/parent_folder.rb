@@ -1,5 +1,6 @@
 module Springcm
   module Mixins
+    # Mixin for objects that have a parent folder.
     module ParentFolder
       def parent_folder_href
         # Root folders won't have ParentFolder key

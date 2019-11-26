@@ -1,5 +1,6 @@
 module Springcm
   module Mixins
+    # Mixin for objects that have security attached, e.g. folders.
     module AccessLevel
       # @return [Boolean] Does the API user have see permission
       def see?

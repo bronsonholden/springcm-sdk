@@ -1,4 +1,8 @@
 module Springcm
+  # A list object of arbitrary SpringCM resources. Allows for easy navigation
+  # of paged resources like documents and attribute groups. All resources
+  # that are retrieved in this manner are attached to a parent object, e.g.
+  # the account for attribute groups, or a folder for documents.
   class ResourceList < Object
     def initialize(data, parent_object, kind, client)
       @parent_object = parent_object

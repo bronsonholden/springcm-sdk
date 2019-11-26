@@ -5,6 +5,13 @@ module Springcm
       @data = data
     end
 
+    # For convenience, top-level properties of a SpringCM object's JSON data
+    # are accessible via instance methods (underscore format), e.g.
+    # attribute_groups to retrieve JSON for $.AttributeGroups. This can and
+    # is often overridden by inheriting classes by defining a method and
+    # extending what it does. Some mixins also provide convenience methods
+    # for retrieving data deeper in the JSON document, e.g. documents_href
+    # via Springcm::Mixins::Documents.
     def method_missing(m, *args, &block)
       key = m.to_s.split("_").map(&:capitalize).join
       if @data.key?(key)
@@ -14,6 +21,7 @@ module Springcm
       end
     end
 
+    # Retrieve the raw JSON document for this object.
     def raw
       @data
     end

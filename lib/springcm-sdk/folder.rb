@@ -17,6 +17,7 @@ module Springcm
       }
     end
 
+    # Retrieve a page of folders contained in this folder.
     def folders(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)
@@ -33,6 +34,7 @@ module Springcm
       end
     end
 
+    # Retrieve the containing folder.
     def parent_folder
       uri = URI(parent_folder_href)
       url = "#{uri.scheme}://#{uri.host}"
@@ -51,6 +53,7 @@ module Springcm
       end
     end
 
+    # Retrieve a page of documents in this folder.
     def documents(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       uri = URI(documents_href)
