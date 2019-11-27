@@ -10,6 +10,7 @@ All notable changes to springcm-sdk will be documented in this file.
 * Folder#move (by destination folder path or UID)
 * Document#move (by destination folder path or UID)
 * Account#attribute_groups
+* Mixins::Attributes#get_attribute
 
 ### Changed
 * Tweaked PageBuilder to support items that don't have a parent folder.
