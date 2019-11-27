@@ -69,7 +69,109 @@ class DocumentBuilder < Builder
         "Create" => access.include?(:create),
         "SetAccess" => access.include?(:set_access)
       },
-      "AttributeGroups" => {}, # TODO: Allow building attributes
+      "AttributeGroups" => { # TODO: Allow building attributes
+        "Attribute Group" => {
+          "Field" => {
+            "AttributeType" => "String",
+            "RepeatingAttribute" => false,
+            "Value" => "A"
+          },
+          "Attribute Set" => {
+            "AttributeType" => "Set",
+            "RepeatingAttribute" => false,
+            "Attribute Set Field" => {
+              "AttributeType" => "String",
+              "RepeatingAttribute" => false,
+              "Value" => "B"
+            }
+          },
+          "Repeatable Attribute Set" => {
+            "Items" => [
+              {
+                "Repeatable Attribute Set Field" => {
+                  "AttributeType" => "String",
+                  "RepeatingAttribute" => false,
+                  "Value" => "1"
+                }
+              },
+              {
+                "Repeatable Attribute Set Field" => {
+                  "AttributeType" => "String",
+                  "RepeatingAttribute" => false,
+                  "Value" => "2"
+                }
+              },
+              {
+                "Repeatable Attribute Set Field" => {
+                  "AttributeType" => "String",
+                  "RepeatingAttribute" => false,
+                  "Value" => "3"
+                }
+              }
+            ],
+            "AttributeType" => "Set",
+            "RepeatingAttribute" => true
+          },
+          "Repeatable Field" => {
+            "AttributeType" => "String",
+            "RepeatingAttribute" => true,
+            "Value" => [
+              "R1",
+              "R2",
+              "R3"
+            ]
+          },
+          "Number Field" => {
+            "AttributeType" => "Number",
+            "RepeatingAttribute" => false,
+            "Value" => "123"
+          },
+          "Date Field" => {
+            "AttributeType" => "Date",
+            "RepeatingAttribute" => false,
+            "Value" => "20191101000000"
+          },
+          "Drop Down Field" => {
+            "AttributeType" => "DropDown",
+            "RepeatingAttribute" => false,
+            "Value" => "Option 1"
+          },
+          "Decimal Field" => {
+            "AttributeType" => "Decimal",
+            "RepeatingAttribute" => false,
+            "Value" => "1.22"
+          },
+          "Auto Number Field" => {
+            "AttributeType" => "AutoNumber",
+            "RepeatingAttribute" => false,
+            "Value" => "6"
+          },
+          "Dynamic Drop Down Field" => {
+            "AttributeType" => "MagicDropDown",
+            "RepeatingAttribute" => false,
+            "Value" => "Dynamic Option 1"
+          },
+          "Cascading Attribute Set" => {
+            "AttributeType" => "Set",
+            "RepeatingAttribute" => false,
+            "Cascading Field 1" => {
+              "AttributeType" => "Cascade",
+              "RepeatingAttribute" => false,
+              "Value" => "Cascading Value 1.1"
+            },
+            "Cascading Field 2" => {
+              "AttributeType" => "Cascade",
+              "RepeatingAttribute" => false,
+              "Value" => "Cascading Value 1.2"
+            },
+            "Cascading Extension Field" => {
+              "AttributeType" => "String",
+              "RepeatingAttribute" => false,
+              "Value" => "Ext"
+            }
+          }
+        }
+      },
       "PageCount" => page_count,
       "Lock" => {
         "Href" => "#{client.object_api_url}/documents/#{uid}/lock"
