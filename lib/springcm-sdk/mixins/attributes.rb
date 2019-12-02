@@ -37,6 +37,7 @@ module Springcm
         # Repeating set
         if !field_set_config.nil? && field_set_config["RepeatingAttribute"]
           set_data = group_data.fetch(field_set_config["Name"], nil)
+          return nil if set_data.nil?
           set_data["Items"].map { |item|
             deserialize_field(item[field])
           }
