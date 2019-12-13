@@ -1,23 +1,9 @@
+require "springcm-sdk/helpers"
+
 module Springcm
   module Mixins
     # Mixin for objects that have attributes.
     module Attributes
-      def deserialize_field(field)
-        type = field["AttributeType"]
-        value = field["Value"]
-        if type == "String"
-          value
-        elsif type == "Number"
-          value.to_i
-        elsif type == "Decimal"
-          value.to_f
-        elsif type == "Date"
-          Date.strptime(value[0..8], "%Y%m%d")
-        else
-          value
-        end
-      end
-
       def get_attribute(group:, field:)
         group_config = @client.account.all_attribute_groups.select { |g|
           g.name == group
@@ -39,12 +25,12 @@ module Springcm
           set_data = group_data.fetch(field_set_config["Name"], nil)
           return nil if set_data.nil?
           set_data["Items"].map { |item|
-            deserialize_field(item[field])
+            Springcm::Helpers.deserialize_field(item[field])
           }
         else
           field_data = group_data.fetch(field, nil)
           return nil if field_data.nil?
-          deserialize_field(field_data)
+          Springcm::Helpers.deserialize_field(field_data)
         end
       end
     end

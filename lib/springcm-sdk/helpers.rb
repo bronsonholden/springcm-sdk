@@ -10,5 +10,22 @@ module Springcm
         raise ArgumentError.new("Offset must be a positive, non-zero integer.")
       end
     end
+
+    # Deserialize a SpringCM attribute value
+    def self.deserialize_field(field)
+      type = field["AttributeType"]
+      value = field["Value"]
+      if type == "String"
+        value
+      elsif type == "Number"
+        value.to_i
+      elsif type == "Decimal"
+        value.to_f
+      elsif type == "Date"
+        Date.strptime(value[0..8], "%Y%m%d")
+      else
+        value
+      end
+    end
   end
 end
