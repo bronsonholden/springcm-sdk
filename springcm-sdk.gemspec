@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.executables   = ["springcm"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "faraday", "~> 0.15.4"
+  spec.add_dependency "faraday", "~> 0.17.1"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
