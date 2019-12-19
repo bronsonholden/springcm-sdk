@@ -1,6 +1,6 @@
 # SpringCM SDK
 
-[![Gem Version](https://badge.fury.io/rb/springcm-sdk.svg)](https://badge.fury.io/rb/springcm-sdk) [![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk) [![Maintainability](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/maintainability)](https://codeclimate.com/github/paulholden2/springcm-sdk/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/test_coverage)](https://codeclimate.com/github/paulholden2/springcm-sdk/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/springcm-sdk.svg)](https://badge.fury.io/rb/springcm-sdk) [![Depfu](https://badges.depfu.com/badges/d19cc9a4361b84a276e21997c49e640e/overview.svg)](https://depfu.com/github/paulholden2/springcm-sdk?project_id=10385) [![Build Status](https://travis-ci.org/paulholden2/springcm-sdk.svg?branch=master)](https://travis-ci.org/paulholden2/springcm-sdk) [![Maintainability](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/maintainability)](https://codeclimate.com/github/paulholden2/springcm-sdk/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/06e1dd90fde417de15da/test_coverage)](https://codeclimate.com/github/paulholden2/springcm-sdk/test_coverage)
 
 This gem is a library for working with the SpringCM REST API.
 
