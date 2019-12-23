@@ -3,6 +3,9 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Added
+* Document#history
+* History items
 
 ## [0.3.4] - 2019-12-11
 ### Added
