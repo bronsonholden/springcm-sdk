@@ -104,6 +104,16 @@ class FakeSpringcm < FakeService
     json_response 200, builder.data.to_json
   end
 
+  get "/v201411/documents/:document_uid/historyitems" do
+    document = DocumentBuilder.new(client).uid(params["document_uid"]).build
+    builder = PageBuilder.new(document.href, Springcm::HistoryItem, client)
+    5.times do
+      history_item = HistoryItemBuilder.new(client)
+      builder.add(history_item)
+    end
+    json_response 200, builder.build.to_json
+  end
+
   patch "/v201411/documents/:document_uid" do
     builder = DocumentBuilder.new(client).uid(params[:document_uid])
     json_response 200, builder.data.to_json

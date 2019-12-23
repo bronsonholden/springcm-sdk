@@ -3,6 +3,7 @@ RSpec.describe Springcm::Document do
   let(:folder) { client.root_folder }
   let(:documents) { folder.documents }
   let(:document) { documents.items.first }
+  let(:history) { document.history }
   let(:trashy) { client.document(uid: "86592c45-e907-ea11-9c2b-3ca82a1e3f41") }
 
   context "document API" do
@@ -40,6 +41,12 @@ RSpec.describe Springcm::Document do
 
     it "retrieves documents" do
       expect(documents.items).to all(be_a(Springcm::Document))
+    end
+
+    describe "history items" do
+      it "is a resource list" do
+        expect(history).to be_a(Springcm::ResourceList)
+      end
     end
   end
 end
