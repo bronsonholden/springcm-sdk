@@ -3,6 +3,8 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+
+## [0.3.5] - 2019-12-23
 ### Added
 * Document#history
 * History items
@@ -72,7 +74,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Initial release to reserve gem name
 
-[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.4...HEAD
+[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.5...HEAD
 [0.1.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.0
 [0.1.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.2
@@ -82,3 +84,4 @@ All notable changes to springcm-sdk will be documented in this file.
 [0.3.2]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.2
 [0.3.3]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.3
 [0.3.4]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.4
+[0.3.5]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.5
