@@ -54,7 +54,7 @@ module Springcm
       elsif kind == Springcm::AttributeGroup
         method = :attribute_groups
       elsif kind == Springcm::HistoryItem
-        method = :history_items
+        method = :history
       else
         raise ArgumentError.new("Resource kind must be one of: Springcm::Document, Springcm::Folder, Springcm::AttributeGroup, Springcm::HistoryItem.")
       end
