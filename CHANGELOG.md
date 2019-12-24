@@ -4,6 +4,11 @@ All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.6] - 2019-12-23
+### Changed
+* Fix resource list behavior for history items. Was returning the document's
+  $.HistoryItems.Href instead of the next page of HistoryItems
+
 ## [0.3.5] - 2019-12-23
 ### Added
 * Document#history
@@ -74,7 +79,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Initial release to reserve gem name
 
-[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.5...HEAD
+[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.3.6...HEAD
 [0.1.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.0
 [0.1.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.2
@@ -85,3 +90,4 @@ All notable changes to springcm-sdk will be documented in this file.
 [0.3.3]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.3
 [0.3.4]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.4
 [0.3.5]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.5
+[0.3.6]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.6
