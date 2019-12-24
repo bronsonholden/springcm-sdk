@@ -78,7 +78,7 @@ class FakeSpringcm < FakeService
 
   get "/v201411/folders/:folder_uid/documents" do
     parent_folder = FolderBuilder.new(client).uid(params["folder_uid"]).build
-    builder = PageBuilder.new(parent_folder.href, Springcm::Document, client)
+    builder = PageBuilder.new(parent_folder.href, Springcm::Document, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
     folder = FolderBuilder.new(client).build
     5.times do
       document = DocumentBuilder.new(client).uid(UUID.generate).parent(folder)
@@ -106,8 +106,8 @@ class FakeSpringcm < FakeService
 
   get "/v201411/documents/:document_uid/historyitems" do
     document = DocumentBuilder.new(client).uid(params["document_uid"]).build
-    builder = PageBuilder.new(document.href, Springcm::HistoryItem, client)
-    5.times do
+    builder = PageBuilder.new(document.href, Springcm::HistoryItem, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.times do
       history_item = HistoryItemBuilder.new(client)
       builder.add(history_item)
     end

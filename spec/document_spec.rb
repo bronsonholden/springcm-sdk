@@ -46,6 +46,8 @@ RSpec.describe Springcm::Document do
     describe "history items" do
       it "is a resource list" do
         expect(history).to be_a(Springcm::ResourceList)
+        expect(history.next).to be_a(Springcm::ResourceList)
+        expect(history.next.prev).to be_a(Springcm::ResourceList)
       end
     end
   end
