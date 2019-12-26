@@ -1,3 +1,4 @@
+require "uuid"
 require_relative "fake_service"
 
 class FakeSpringcm < FakeService
