@@ -1,3 +1,4 @@
+require "securerandom"
 require_relative "fake_service"
 
 class FakeSpringcmAuth < FakeService
