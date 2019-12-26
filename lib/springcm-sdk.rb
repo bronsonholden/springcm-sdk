@@ -20,4 +20,16 @@ module Springcm
       super("Invalid Client Id or Client Secret")
     end
   end
+
+  class AuthExpiredError < Error
+    def initialize
+      super("Authorization expired")
+    end
+  end
+
+  class RateLimitExceededError < Error
+    def initialize
+      super("Rate limit exceeded")
+    end
+  end
 end

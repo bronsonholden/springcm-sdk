@@ -3,6 +3,8 @@ require_relative "fake_service"
 
 class FakeSpringcm < FakeService
   @@ratelimit = true
+  @@auth_expired = true
+  @@access_token = nil
 
   def initialize
     @root_uid = UUID.generate
@@ -13,9 +15,37 @@ class FakeSpringcm < FakeService
   get "/v201411/ratelimit" do
     if @@ratelimit
       @@ratelimit = false
-      json_response 429, {}
+      json_response 429, {
+        "Error" => {
+          "HttpStatusCode" => 429,
+          "UserMessage" => "Rate limit exceeded.",
+          "DeveloperMessage" => "Rate limit exceeded.",
+          "ErrorCode" => 103,
+          "ReferenceId" => UUID.generate
+        }
+      }.to_json
     else
-      json_response 200, {}
+      json_response 200, {}.to_json
+    end
+  end
+
+  get "/v201411/authexpire" do
+    access_token = request.env['HTTP_AUTHORIZATION'].match(/bearer (.*)/)[1]
+    if @@auth_expired
+      @@auth_expired = false
+      @@access_token = access_token
+      json_response 401, {
+        "Error" => {
+          "HttpStatusCode" => 401,
+          "UserMessage" => "Access Denied",
+          "DeveloperMessage" => "Access Denied",
+          "ErrorCode" => 103,
+          "ReferenceId" => UUID.generate
+        }
+      }.to_json
+    else
+      raise "client did not retry with new access token" if access_token == @@access_token
+      json_response 200, {}.to_json
     end
   end
 

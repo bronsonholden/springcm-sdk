@@ -3,6 +3,7 @@ require "json"
 require "springcm-sdk/account"
 require "springcm-sdk/folder"
 require "springcm-sdk/document"
+require "springcm-sdk/middleware"
 
 module Springcm
   class Client
@@ -28,7 +29,11 @@ module Springcm
     # @param safe If truthy, connection failure does not raise an exception
     # @return [Boolean] Whether connection was successful
     def connect(safe=true)
-      conn = Faraday.new(url: auth_url)
+      conn = Faraday.new(url: auth_url) do |conn|
+        conn.request :retry, retry_statuses: [429], exceptions: [Springcm::RateLimitExceededError]
+        conn.use Springcm::Middleware::RateLimit
+        conn.adapter :net_http
+      end
       res = conn.post do |req|
         req.headers['Content-Type'] = 'application/json'
         req.body = {
@@ -179,9 +184,18 @@ module Springcm
           interval: 1,
           interval_randomness: 0.5,
           backoff_factor: 2,
-          retry_statuses: [429]
+          retry_statuses: [401, 429],
+          exceptions: [Springcm::AuthExpiredError, Springcm::RateLimitExceededError],
+          retry_block: -> (env, options, retries, exception) {
+            if exception.class == Springcm::AuthExpiredError
+              connect!
+              env.request_headers['Authorization'] = "bearer #{@access_token}"
+            end
+          }
         }]
         conn.request :retry, *options
+        conn.use Springcm::Middleware::RateLimit
+        conn.use Springcm::Middleware::AuthExpire
         conn.adapter :net_http
         conn.authorization('bearer', @access_token)
       end

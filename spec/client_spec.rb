@@ -24,6 +24,15 @@ RSpec.describe Springcm::Client do
     expect(res.success?).to eq(true)
   end
 
+  it "authenticates and retries on 401" do
+    client.connect!
+    conn = client.authorized_connection(url: client.object_api_url)
+    res = conn.get do |req|
+      req.url "authexpire"
+    end
+    expect(res.success?).to eq(true)
+  end
+
   context "with invalid data center" do
     let(:data_center) { "narnia" }
     it "raises connection info error" do
