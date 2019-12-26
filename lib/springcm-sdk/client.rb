@@ -169,6 +169,10 @@ module Springcm
     end
 
     def authorized_connection(*options)
+      if !authenticated?
+        connect!
+      end
+
       Faraday.new(*options) do |conn|
         options = [{
           max: 10,
