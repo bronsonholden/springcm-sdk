@@ -7,9 +7,17 @@ class FakeSpringcmAuth < FakeService
     client_secret = data.fetch("client_secret")
 
     if client_id == "client_id" && client_secret == "client_secret"
-      json_file_response 200, "auth_success.json"
+      json_response 200, {
+          "access_token" => SecureRandom.uuid,
+          "token_type": "bearer",
+          "expires_in": 3600,
+          "api_base_url": "https://apiuatna11.springcm.com"
+      }.to_json
     else
-      json_file_response 401, "auth_invalid_client_id_or_secret.json"
+      json_response 401, {
+          "error" => "invalid_client",
+          "errorDescription" => "Invalid Client Id or Client Secret"
+      }.to_json
     end
   end
 end
