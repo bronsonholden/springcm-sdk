@@ -39,7 +39,7 @@ module Springcm
       if res.success?
         data = JSON.parse(res.body)
         @access_token = data.fetch("access_token")
-        @expiry = Time.now + data.fetch("expires_in")
+        @expiry = Time.now + data.fetch("expires_in") - 5.minutes
       else
         @access_token = nil
         @expiry = nil
