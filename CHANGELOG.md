@@ -8,6 +8,10 @@ All notable changes to springcm-sdk will be documented in this file.
 * Faraday middleware for retrying on Faraday::ConnectionFailed. Can be
   disabled via new Client options.
 
+### Changed
+* Adjust auth window to re-authenticate no more than 5 minutes before
+  access token expiration.
+
 ## [0.3.6] - 2019-12-23
 ### Changed
 * Fix resource list behavior for history items. Was returning the document's
