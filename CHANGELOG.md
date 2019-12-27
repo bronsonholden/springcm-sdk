@@ -5,6 +5,8 @@ All notable changes to springcm-sdk will be documented in this file.
 ## [Unreleased]
 ### Added
 * Faraday middleware for authorization expiration and rate limit handling.
+* Faraday middleware for retrying on Faraday::ConnectionFailed. Can be
+  disabled via new Client options.
 
 ## [0.3.6] - 2019-12-23
 ### Changed

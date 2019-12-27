@@ -7,16 +7,27 @@ require "springcm-sdk/middleware"
 
 module Springcm
   class Client
+    # Default API client options
+    DEFAULT_OPTIONS = {
+      # If true, the client will use a simple retry mechanism when connection
+      # to the API server fails due to e.g. temporary Internet service outage.
+      # The connection is re-attempted up to five times, delaying 2 ** n
+      # seconds between attempts, where n is the number of previous attempts.
+      retry_connection_failed: true
+    }.freeze
+
     attr_reader :access_token
 
     # @param data_center [String] Data center name, e.g. uatna11
     # @param client_id [String] Your API client ID
     # @param client_secret [String] Your API client secret
-    def initialize(data_center, client_id, client_secret)
+    # @parma options [Hash] API client options
+    def initialize(data_center, client_id, client_secret, options=DEFAULT_OPTIONS)
       if !["na11", "uatna11", "eu11", "eu21", "na21", "us11"].include?(data_center)
         raise Springcm::ConnectionInfoError.new("Invalid data center '#{data_center.to_s}'")
       end
 
+      @options = options
       @data_center = data_center
       @client_id = client_id
       @client_secret = client_secret
@@ -32,6 +43,7 @@ module Springcm
       conn = Faraday.new(url: auth_url) do |conn|
         conn.request :retry, retry_statuses: [429], exceptions: [Springcm::RateLimitExceededError]
         conn.use Springcm::Middleware::RateLimit
+        conn.use Springcm::Middleware::RetryConnectionFailed if @options[:retry_connection_failed]
         conn.adapter :net_http
       end
       res = conn.post do |req|
@@ -196,6 +208,7 @@ module Springcm
         conn.request :retry, *options
         conn.use Springcm::Middleware::RateLimit
         conn.use Springcm::Middleware::AuthExpire
+        conn.use Springcm::Middleware::RetryConnectionFailed if @options[:retry_connection_failed]
         conn.adapter :net_http
         conn.authorization('bearer', @access_token)
       end
