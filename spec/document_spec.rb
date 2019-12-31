@@ -11,18 +11,6 @@ RSpec.describe Springcm::Document do
       client.connect!
     end
 
-    it "retrieves number field" do
-      expect(document.get_attribute(group: "Attribute Group", field: "Number Field")).to be_a(Integer)
-    end
-
-    it "retrieves decimal field" do
-      expect(document.get_attribute(group: "Attribute Group", field: "Decimal Field")).to be_a(Float)
-    end
-
-    it "retrieves date field" do
-      expect(document.get_attribute(group: "Attribute Group", field: "Date Field")).to be_a(Date)
-    end
-
     it "can be reloaded" do
       expect(document.reload).to be_a(Springcm::Document)
     end

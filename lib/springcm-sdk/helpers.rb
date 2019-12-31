@@ -11,6 +11,25 @@ module Springcm
       end
     end
 
+    def self.serialize_field(field_config, value)
+      type = field_config.type
+      repeating = field_config.repeating_attribute?
+      serialized = {
+        "AttributeType" => type,
+        "RepeatingAttribute" => repeating
+      }
+      serialized_value = nil
+      if type == "Date"
+        # Raise if value is not a DateTime
+        serialized_value = value.strftime("%m/%d/%Y")
+      else
+        serialized_value = value.to_s
+      end
+      return nil if serialized_value.nil?
+      serialized["Value"] = serialized_value
+      serialized
+    end
+
     # Deserialize a SpringCM attribute value
     def self.deserialize_field(field)
       type = field["AttributeType"]

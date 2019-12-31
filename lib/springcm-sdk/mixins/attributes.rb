@@ -4,6 +4,36 @@ module Springcm
   module Mixins
     # Mixin for objects that have attributes.
     module Attributes
+      def attribute_groups=(value)
+        @data["AttributeGroups"] = value
+      end
+
+      def set_attribute(group:, field:, index: nil, value:)
+        group_config = @client.account.all_attribute_groups.select { |g|
+          g.name == group
+        }.first
+        # Non-existent group
+        return nil if group_config.nil?
+        field_config = group_config.field(field)
+        field_set_config = group_config.set_for_field(field)
+        # Non-existent field
+        return nil if field_config.nil?
+        groups = attribute_groups || {}
+        group_data = groups.fetch(group, {})
+        # Repeating set
+        if !field_set_config.nil? && field_set_config["RepeatingAttribute"]
+          set_name = field_set_config["Name"]
+          set_data = group_data.fetch(set_name, {})
+          set_data["Items"].insert(index || -1, Springcm::Helpers.serialize_field(field_config, value))
+          group_data[set_name] = set_data
+        else
+          group_data[field] = Springcm::Helpers.serialize_field(field_config, value)
+        end
+        groups[group] = group_data
+        attribute_groups = groups
+        value
+      end
+
       def get_attribute(group:, field:)
         group_config = @client.account.all_attribute_groups.select { |g|
           g.name == group
