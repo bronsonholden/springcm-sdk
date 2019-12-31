@@ -1,6 +1,7 @@
 require "securerandom"
 require_relative "fake_service"
 
+# Mock SpringCM authorization service.
 class FakeSpringcmAuth < FakeService
   post "/api/v201606/apiuser" do
     data = request_json

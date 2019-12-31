@@ -1,5 +1,6 @@
 require "springcm-sdk/folder"
 
+# Builder for paged lists of arbitrary SpringCM objects, e.g. Documents.
 class PageBuilder
   def initialize(base_href, kind, client)
     @kind = kind

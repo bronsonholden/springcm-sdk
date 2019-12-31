@@ -1,6 +1,7 @@
 require "uuid"
 require_relative "fake_service"
 
+# Mock SpringCM Object API service.
 class FakeSpringcm < FakeService
   @@ratelimit = true
   @@auth_expired = true

@@ -1,3 +1,4 @@
+# Builder for SpringCM Accounts (account metadata).
 class AccountBuilder < Builder
   property :id, type: String, default: rand(1000..9999).to_s, validate: -> (*args) {
     account_id = args.first

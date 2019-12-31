@@ -1,6 +1,7 @@
 require "springcm-sdk/history_item"
 require_relative "builder"
 
+# Builder for SpringCM history entries.
 class HistoryItemBuilder < Builder
   property :user_email, default: "johndoe@email.com"
   property :action, default: "Download Document Native", validate: -> (action) {

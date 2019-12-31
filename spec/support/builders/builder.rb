@@ -1,3 +1,5 @@
+# Base class for object JSON builders, used for creating arbitrary JSON
+# documents representing fictitious SpringCM objects.
 class Builder
   attr_reader :client
 
@@ -10,14 +12,20 @@ class Builder
     }
   end
 
+  # Retrieve the raw JSON document for the desired object.
   def data
     {}
   end
 
+  # Retrieve the raw JSON document for the desired object as it appears when
+  # returned from an index operation, e.g. /folders/<uid>/documents. Certain
+  # objects exclude some properties when retrieved this way; they can only
+  # be accessed when the specific object is retrieved.
   def itemized_data
     data
   end
 
+  # Return property values as defined by the #property class method.
   def method_missing(m, *args, &block)
     # If not a property
     return super if !property_keys.include?(m)
@@ -49,6 +57,7 @@ class Builder
     self
   end
 
+  # Define a property that can be get or set on the object.
   def self.property(key, type: nil, default: nil, validate: nil, collect: nil)
     if !default.nil? && type.nil?
       type = default.class

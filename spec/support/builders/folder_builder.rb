@@ -1,7 +1,7 @@
 require "springcm-sdk/folder"
 require_relative "builder"
 
-# Builds folder JSON for use in testing
+# Builder for SpringCM Folders.
 class FolderBuilder < Builder
   property :uid, default: UUID.generate, validate: -> (uid) {
     raise ArgumentError.new("Invalid UID #{uid.inspect}") if !UUID.validate(uid)

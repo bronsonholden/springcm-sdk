@@ -1,3 +1,5 @@
+# Builder for SpringCM AttributeGroups (the definitions, not the actual data
+# applied to Documents and/or Folders).
 class AttributeGroupBuilder < Builder
   property :name, type: String, default: "Attribute Group"
   property :is_system, default: false, validate: -> (*args) {

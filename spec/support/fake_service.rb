@@ -1,5 +1,6 @@
 require "sinatra/base"
 
+# Base class for mock remote services.
 class FakeService < Sinatra::Base
   protected
 
