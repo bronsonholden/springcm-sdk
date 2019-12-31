@@ -20,6 +20,10 @@ class AttributeGroupBuilder < Builder
     }
   end
 
+  def itemized_data
+    data.reject { |key| ["Attributes"].include?(key) }
+  end
+
   def attributes
     # TODO: Dynamically build attributes?
     [

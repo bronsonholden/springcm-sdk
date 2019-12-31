@@ -64,6 +64,11 @@ class FakeSpringcm < FakeService
     json_response 200, builder.build.to_json
   end
 
+  get "/v201411/attributegroups/:attributegroup_uid" do
+    builder = AttributeGroupBuilder.new(client).uid(params["attributegroup_uid"])
+    json_response 200, builder.data.to_json
+  end
+
   get "/v201411/folders" do
     if params["systemfolder"] == "root" || params["path"] == "/"
       builder = FolderBuilder.new(client).uid(@root_uid)

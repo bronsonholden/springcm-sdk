@@ -2,7 +2,7 @@ RSpec.describe Springcm::Document do
   let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
   let(:folder) { client.root_folder }
   let(:documents) { folder.documents }
-  let(:document) { documents.items.first }
+  let(:document) { documents.items.first.reload }
   let(:history) { document.history }
   let(:trashy) { client.document(uid: "86592c45-e907-ea11-9c2b-3ca82a1e3f41") }
 

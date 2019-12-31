@@ -202,4 +202,8 @@ class DocumentBuilder < Builder
       "Href" => "#{client.object_api_url}/documents/#{uid}"
     }
   end
+
+  def itemized_data
+    data.reject { |key| ["AttributeGroups"].include?(key) }
+  end
 end

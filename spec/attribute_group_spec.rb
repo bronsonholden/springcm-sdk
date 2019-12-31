@@ -2,7 +2,7 @@ RSpec.describe Springcm::AttributeGroup do
   let(:client) { Springcm::Client.new(data_center, client_id, client_secret) }
   let(:account) { client.account }
   let(:all_attribute_groups) { account.all_attribute_groups }
-  let(:attribute_group) { all_attribute_groups.first }
+  let(:attribute_group) { all_attribute_groups.first.reload }
 
   before(:each) do
     client.connect!
