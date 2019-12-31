@@ -10,6 +10,10 @@ class Builder
     }
   end
 
+  def data
+    {}
+  end
+
   def method_missing(m, *args, &block)
     # If not a property
     return super if !property_keys.include?(m)
