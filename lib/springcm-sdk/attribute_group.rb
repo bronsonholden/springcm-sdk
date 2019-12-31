@@ -6,7 +6,7 @@ module Springcm
   class AttributeGroup < Resource
     # Retrieve an attribute set by name.
     def set(name)
-      res = @data["Attributes"].select { |attr|
+      res = attributes_config.select { |attr|
         attr["Attributes"].is_a?(Array) && attr["Name"] == name
       }
       return nil if !res.any?
@@ -38,7 +38,7 @@ module Springcm
     end
 
     def attributes
-      @data["Attributes"].map { |attr|
+      attributes_config.map { |attr|
         if attr["Attributes"].is_a?(Array)
           attr["Attributes"]
         else
@@ -48,9 +48,16 @@ module Springcm
     end
 
     def sets
-      @data["Attributes"].select { |attr|
+      attributes_config.select { |attr|
         attr["Attributes"].is_a?(Array)
       }
+    end
+
+    protected
+
+    def attributes_config
+      @data = reload.raw if !@data.key?("Attributes")
+      @data["Attributes"]
     end
   end
 end
