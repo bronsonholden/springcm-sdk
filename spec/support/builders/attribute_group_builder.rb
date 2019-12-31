@@ -14,6 +14,7 @@ class AttributeGroupBuilder < Builder
   def data
     {
       "Name" => name,
+      "IsSystem" => false,
       "Attributes" => attributes,
       "Href" => "#{client.object_api_url}/attributegroups/#{uid}"
     }
