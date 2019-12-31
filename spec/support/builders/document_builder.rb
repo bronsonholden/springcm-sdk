@@ -2,17 +2,18 @@ require "springcm-sdk/document"
 require "springcm-sdk/folder"
 require_relative "builder"
 
+# Builder for SpringCM Documents.
 class DocumentBuilder < Builder
   property :uid, default: UUID.generate, validate: -> (uid) {
     raise ArgumentError.new("Invalid UID #{uid.inspect}") if !UUID.validate(uid)
   }
 
-  property :name, default: "Folder"
-  property :description, default: "A folder"
+  property :name, default: "Document.pdf"
+  property :description, default: "A document"
   property :created_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
   property :updated_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
-  property :created_by, default: "FolderBuilder"
-  property :updated_by, default: "FolderBuilder"
+  property :created_by, default: "DocumentBuilder"
+  property :updated_by, default: "DocumentBuilder"
   property :access, default: Set[:see, :read, :write, :move, :create, :set_access], validate: -> (*args) {
     allowed = Set[:see, :read, :write, :move, :create, :set_access]
     new_access = Set[*args]
