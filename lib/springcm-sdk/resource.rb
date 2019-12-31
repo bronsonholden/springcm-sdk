@@ -84,8 +84,12 @@ module Springcm
 
     # Some resources have query parameters that must be passed when
     # retrieving it, e.g. expand=attributegroups when retrieving a document.
-    def resource_params
+    def self.resource_params
       {}
+    end
+
+    def resource_params
+      self.class.resource_params
     end
 
     # Pluralized resource name, e.g. documents or folders. Used to construct
