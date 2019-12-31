@@ -5,6 +5,19 @@ All notable changes to springcm-sdk will be documented in this file.
 ## [Unreleased]
 ### Added
 * #patch and #put for Resources.
+* #set_attribute for Attribute mixin.
+
+### Changed
+* Moved attribute-related tests to a separate test file. May need to re-add
+  to document/folder specs just for live testing.
+* AttributeGroupBuilder JSON now includes IsSystem property.
+
+### Bugfixes
+* Fix issue with Resource#resource_params not being applied properly in
+  request methods.
+* Fix JSON returned from builders when retrieving data in lists, e.g.
+  `/folders/<uid>/documents` does not include attribute groups. Tests have
+  been modified to call #reload where full data is needed.
 
 ## [0.4.0] - 2019-12-27
 ### Added
