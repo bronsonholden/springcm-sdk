@@ -3,6 +3,8 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Added
+* #patch and #put for Resources.
 
 ## [0.4.0] - 2019-12-27
 ### Added

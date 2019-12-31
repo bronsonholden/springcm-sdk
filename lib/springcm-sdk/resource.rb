@@ -30,6 +30,38 @@ module Springcm
       end
     end
 
+    # Send a PATCH request for this resource.
+    def patch
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.patch do |req|
+        req.headers['Content-Type'] = "application/json"
+        req.url resource_uri
+        req.body = raw.to_json
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        self.class.new(data, @client)
+      else
+        nil
+      end
+    end
+
+    # Send a PUT request for this resource.
+    def put
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.put do |req|
+        req.headers['Content-Type'] = "application/json"
+        req.url resource_uri
+        req.body = raw.to_json
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        self.class.new(data, @client)
+      else
+        nil
+      end
+    end
+
     # Send a DELETE request for this resource.
     def delete
       conn = @client.authorized_connection(url: @client.object_api_url)
