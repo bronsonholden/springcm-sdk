@@ -148,14 +148,6 @@ RSpec.describe Springcm::Mixins::Attributes do
     let(:klass) { Integer }
     let(:set_value) { 1 }
     include_examples "attributes"
-
-    context "with no attributes" do
-      describe "set" do
-        it "applies new value" do
-          expect(new_value).to eq(set_value)
-        end
-      end
-    end
   end
 
   describe "decimal field" do
