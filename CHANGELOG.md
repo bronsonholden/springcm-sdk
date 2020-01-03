@@ -6,6 +6,8 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * #patch and #put for Resources.
 * #set_attribute for Attribute mixin.
+* Safeguard against permanent Document deletions. DeleteRefusedError will be
+  be raised on documents that are in the trash folder unless #delete! is used.
 
 ### Changed
 * Moved attribute-related tests to a separate test file. May need to re-add
