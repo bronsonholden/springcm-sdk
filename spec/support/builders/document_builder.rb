@@ -9,6 +9,13 @@ class DocumentBuilder < Builder
   }
 
   property :name, default: "Document.pdf"
+  property :path, default: -> (builder) {
+    dir = "/#{builder.client.account.name}"
+    if !builder.parent.nil?
+      dir = builder.parent.path
+    end
+    "#{dir}/#{builder.name}"
+  }
   property :description, default: "A document"
   property :created_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
   property :updated_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
@@ -48,6 +55,12 @@ class DocumentBuilder < Builder
     Springcm::Document.new(data, client)
   end
 
+  def delete!
+    trash_folder = FolderBuilder.new(@client).name("Trash")
+    date_folder = FolderBuilder.new(@client).name(DateTime.now.strftime("%Y%m%d")).parent(trash_folder.build)
+    self.parent(date_folder.build)
+  end
+
   def data
     {
       "Name" => "#{name}",
@@ -59,6 +72,7 @@ class DocumentBuilder < Builder
       "ParentFolder" => {
         "Href" => "#{client.object_api_url}/folders/c0ca34aa-3774-e611-bb8d-6c3be5a75f4d"
       },
+      "Path" => path,
       "HistoryItems" => {
         "Href" => "#{client.object_api_url}/documents/0063805f-9b42-e811-9c12-3ca82a1e3f41/historyitems"
       },

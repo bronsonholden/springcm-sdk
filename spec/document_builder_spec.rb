@@ -5,6 +5,7 @@ RSpec.describe DocumentBuilder do
   let(:login_name) { "johndoe@email.com" }
   let(:description) { "A test document" }
   let(:builder) { DocumentBuilder.new(client).uid(uid) }
+  let(:parent) { FolderBuilder.new(client).name("Parent").build }
   let(:document) { builder.build }
 
   it "rejects invalid UIDs" do
@@ -26,6 +27,11 @@ RSpec.describe DocumentBuilder do
   it "sets name" do
     builder.name(document_name)
     expect(document.name).to eq(document_name)
+  end
+
+  it "sets path" do
+    builder.parent(parent)
+    expect(builder.path).to be_a(String)
   end
 
   it "sets created_date" do

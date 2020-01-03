@@ -11,7 +11,7 @@ module Springcm
 
     def self.resource_params
       {
-        "expand" => "attributegroups"
+        "expand" => "attributegroups,path"
       }
     end
 
@@ -29,6 +29,21 @@ module Springcm
       else
         nil
       end
+    end
+
+    def delete!
+      unsafe_delete
+    end
+
+    alias_method :unsafe_delete, :delete
+    private :unsafe_delete
+
+    def delete
+      reload if @data["Path"].nil?
+      if path.start_with?("/#{@client.account.name}/Trash")
+        raise Springcm::DeleteRefusedError.new(path)
+      end
+      unsafe_delete
     end
   end
 end

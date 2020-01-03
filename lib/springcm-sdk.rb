@@ -44,4 +44,10 @@ module Springcm
       super("Rate limit exceeded")
     end
   end
+
+  class DeleteRefusedError < Error
+    def initialize(path)
+      super("Refused to delete #{path}, use #delete! instead.")
+    end
+  end
 end

@@ -8,6 +8,13 @@ class FolderBuilder < Builder
   }
 
   property :name, default: "Folder"
+  property :path, default: -> (builder) {
+    dir = "/#{builder.client.account.name}"
+    if !builder.parent.nil?
+      dir = builder.parent.path
+    end
+    "#{dir}/#{builder.name}"
+  }
   property :description, default: "A folder"
   property :created_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
   property :updated_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
@@ -51,6 +58,7 @@ class FolderBuilder < Builder
       "UpdatedBy" => "#{updated_by}",
       "Description" => "#{description}",
       "BrowseDocumentsUrl" => "https://uatna11.springcm.com/atlas/Link/Folder/0/#{@uid}",
+      "Path" => path,
       "AccessLevel" => {
         "See" => access.include?(:see),
         "Read" => access.include?(:read),

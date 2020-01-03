@@ -5,6 +5,7 @@ RSpec.describe Springcm::Document do
   let(:document) { documents.items.first.reload }
   let(:history) { document.history }
   let(:trashy) { client.document(uid: "86592c45-e907-ea11-9c2b-3ca82a1e3f41") }
+  let(:in_trash) { DocumentBuilder.new(client).delete!.build }
 
   context "document API" do
     before(:each) do
@@ -17,6 +18,18 @@ RSpec.describe Springcm::Document do
 
     it "can be deleted" do
       expect(trashy.delete).to be_a(Springcm::Document)
+    end
+
+    it "refuses to permanently delete" do
+      expect { in_trash.delete }.to raise_error(Springcm::DeleteRefusedError)
+    end
+
+    it "allows explicit permanent deletion" do
+      expect { in_trash.delete! }.not_to raise_error
+    end
+
+    it "has private unsafe delete" do
+      expect { in_trash.unsafe_delete }.to raise_error(NoMethodError)
     end
 
     it "can be moved" do

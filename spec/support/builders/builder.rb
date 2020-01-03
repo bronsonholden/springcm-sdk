@@ -29,8 +29,15 @@ class Builder
   def method_missing(m, *args, &block)
     # If not a property
     return super if !property_keys.include?(m)
+
     # If no args, behave like a getter
-    return @values[m] if !args.any?
+    if !args.any?
+      prop = @values[m]
+      if prop.is_a?(Proc)
+        prop = prop.call(self)
+      end
+      return prop
+    end
 
     # Get property definition
     prop = property_by_key(m)
