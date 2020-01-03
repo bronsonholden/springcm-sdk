@@ -15,6 +15,18 @@ module Springcm
   class ConnectionInfoError < Error
   end
 
+  class NoAttributeGroupError < Error
+    def initialize(group)
+      super("No such attribute group: #{group}")
+    end
+  end
+
+  class NoAttributeFieldError < Error
+    def initialize(group, field)
+      super("No such attribute field: #{group}.#{field}")
+    end
+  end
+
   class InvalidClientIdOrSecretError < Error
     def initialize
       super("Invalid Client Id or Client Secret")

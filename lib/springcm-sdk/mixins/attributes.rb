@@ -13,11 +13,11 @@ module Springcm
           g.name == group
         }.first
         # Non-existent group
-        return nil if group_config.nil?
+        raise Springcm::NoAttributeGroupError.new(group) if group_config.nil?
         field_config = group_config.field(field)
         field_set_config = group_config.set_for_field(field)
         # Non-existent field
-        return nil if field_config.nil?
+        raise Springcm::NoAttributeFieldError.new(group, field) if field_config.nil?
         groups = attribute_groups || {}
         group_data = groups.fetch(group, {})
         # Repeating set
@@ -39,11 +39,11 @@ module Springcm
           g.name == group
         }.first
         # Non-existent group
-        return nil if group_config.nil?
+        raise Springcm::NoAttributeGroupError.new(group) if group_config.nil?
         field_config = group_config.field(field)
         field_set_config = group_config.set_for_field(field)
         # Non-existent field
-        return nil if field_config.nil?
+        raise Springcm::NoAttributeFieldError.new(group, field) if field_config.nil?
         groups = attribute_groups
         # No attribute groups applied
         return nil if groups.nil?
