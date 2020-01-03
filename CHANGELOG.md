@@ -12,6 +12,7 @@ All notable changes to springcm-sdk will be documented in this file.
   to document/folder specs just for live testing.
 * AttributeGroupBuilder JSON now includes IsSystem property.
 * Fix property default values on DocumentBuilder
+* Raise error on invalid attribute groups or fields.
 
 ### Bugfixes
 * Fix issue with Resource#resource_params not being applied properly in
