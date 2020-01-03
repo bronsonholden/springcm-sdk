@@ -3,6 +3,8 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+
+## [0.5.0] - 2020-01-03
 ### Added
 * #patch and #put for Resources.
 * #set_attribute for Attribute mixin.
@@ -108,7 +110,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Initial release to reserve gem name
 
-[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.4.0...HEAD
+[Unreleased]: https://github.com/paulholden2/springcm-sdk/compare/0.5.0...HEAD
 [0.1.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.0
 [0.1.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.1.2
@@ -121,3 +123,4 @@ All notable changes to springcm-sdk will be documented in this file.
 [0.3.5]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.5
 [0.3.6]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.6
 [0.4.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.4.0
+[0.5.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.5.0
