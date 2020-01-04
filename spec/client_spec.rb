@@ -14,6 +14,10 @@ RSpec.describe Springcm::Client do
 
   test_valid_data_center "uatna11"
   test_valid_data_center "na11"
+  test_valid_data_center "na21"
+  test_valid_data_center "us11"
+  test_valid_data_center "eu11"
+  test_valid_data_center "eu21"
 
   it "retries on 429" do
     client.connect!
