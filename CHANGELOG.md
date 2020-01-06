@@ -3,6 +3,8 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Changed
+* Path is expanded when retrieving individual Folders
 
 ## [0.5.0] - 2020-01-03
 ### Added

@@ -13,7 +13,7 @@ module Springcm
 
     def self.resource_params
       {
-        "expand" => "attributegroups"
+        "expand" => "attributegroups,path"
       }
     end
 
