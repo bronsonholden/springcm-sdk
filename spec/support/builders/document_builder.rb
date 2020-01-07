@@ -70,6 +70,7 @@ class DocumentBuilder < Builder
       "UpdatedBy" => "#{updated_by}",
       "Description" => "#{description}",
       "ParentFolder" => {
+        # TODO: dynamic parent folder UID in this link
         "Href" => "#{client.object_api_url}/folders/c0ca34aa-3774-e611-bb8d-6c3be5a75f4d"
       },
       "Path" => path,
