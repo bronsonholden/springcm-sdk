@@ -45,6 +45,12 @@ RSpec.describe Springcm::Document do
       expect(documents.items).to all(be_a(Springcm::Document))
     end
 
+    describe "download" do
+      it "downloads file" do
+        expect(document.download).to be_a(StringIO)
+      end
+    end
+
     describe "history items" do
       it "is a resource list" do
         expect(history).to be_a(Springcm::ResourceList)

@@ -8,6 +8,7 @@ require "uuid"
 require "springcm-sdk"
 require "support/fake_springcm"
 require "support/fake_springcm_auth"
+require "support/fake_springcm_content"
 require "support/builders/builder"
 require "support/builders/account_builder"
 require "support/builders/folder_builder"
@@ -42,7 +43,8 @@ RSpec.configure do |config|
 
   if !ENV.key?("SPEC_SPRINGCM_LIVE")
     config.before(:each) do
-      stub_request(:any, /api(download|upload)?(uat)?na11.*\.springcm\.com/).to_rack(FakeSpringcm)
+      stub_request(:any, /api(download|upload)?(uat)?na11.*\.springcm\.com/).to_rack(FakeSpringcmContent)
+      stub_request(:any, /api(uat)?na11.*\.springcm\.com/).to_rack(FakeSpringcm)
       stub_request(:any, /auth(uat)?\.springcm\.com/).to_rack(FakeSpringcmAuth)
     end
   end

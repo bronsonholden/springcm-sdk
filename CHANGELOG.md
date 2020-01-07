@@ -6,9 +6,10 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Added
 * Document versions via #versions method. Document versions behave much like
   normal Documents, but have some different behaviors.
+* Document#download method.
 
 ### Changed
-* Path is expanded when retrieving individual Folders
+* Path is expanded when retrieving individual Folders.
 
 ### Removed
 * `springcm` executable. Will be provided via the springcm-cli gem.

@@ -15,6 +15,22 @@ module Springcm
       }
     end
 
+    def download
+      io = StringIO.new
+      conn = @client.authorized_connection(url: @client.download_api_url)
+      res = conn.get do |req|
+        req.url resource_uri
+        req.options.on_data = Proc.new do |chunk, total_bytes|
+          io << chunk
+        end
+      end
+      if res.success?
+        io
+      else
+        nil
+      end
+    end
+
     def history(offset: 0, limit: 20)
       Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)
