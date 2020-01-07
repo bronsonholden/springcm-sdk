@@ -6,6 +6,9 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Changed
 * Path is expanded when retrieving individual Folders
 
+### Removed
+* `springcm` executable. Will be provided via the springcm-cli gem.
+
 ## [0.5.0] - 2020-01-03
 ### Added
 * #patch and #put for Resources.
