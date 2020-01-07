@@ -75,7 +75,7 @@ class DocumentBuilder < Builder
       },
       "Path" => path,
       "HistoryItems" => {
-        "Href" => "#{client.object_api_url}/documents/0063805f-9b42-e811-9c12-3ca82a1e3f41/historyitems"
+        "Href" => "#{client.object_api_url}/documents/#{uid}/historyitems"
       },
       "AccessLevel" => {
         "See" => access.include?(:see),
