@@ -3,6 +3,10 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Added
+* Document versions via #versions method. Document versions behave much like
+  normal Documents, but have some different behaviors.
+
 ### Changed
 * Path is expanded when retrieving individual Folders
 
