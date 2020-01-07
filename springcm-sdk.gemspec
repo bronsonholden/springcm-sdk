@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.bindir        = "exe"
-  spec.executables   = ["springcm"]
+  spec.executables   = []
   spec.require_paths = ["lib"]
 
   spec.add_dependency "faraday", "~> 0.17.1"
