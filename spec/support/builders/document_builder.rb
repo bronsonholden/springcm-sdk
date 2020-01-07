@@ -219,6 +219,6 @@ class DocumentBuilder < Builder
   end
 
   def itemized_data
-    data.reject { |key| ["AttributeGroups"].include?(key) }
+    data.reject { |key| ["AttributeGroups", "Path"].include?(key) }
   end
 end
