@@ -151,6 +151,16 @@ class FakeSpringcm < FakeService
     json_response 200, builder.build.to_json
   end
 
+  get "/v201411/documents/:document_uid/versions" do
+    document = DocumentBuilder.new(client).uid(params["document_uid"]).build
+    builder = PageBuilder.new(document.href, Springcm::Document, client, resource_override: "versions").offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.downto(1) do |ver|
+      document = DocumentBuilder.new(client).uid(UUID.generate).version(ver)
+      builder.add(document)
+    end
+    json_response 200, builder.build.to_json
+  end
+
   patch "/v201411/documents/:document_uid" do
     builder = DocumentBuilder.new(client).uid(params[:document_uid])
     json_response 200, builder.data.to_json

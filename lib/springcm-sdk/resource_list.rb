@@ -4,9 +4,10 @@ module Springcm
   # that are retrieved in this manner are attached to a parent object, e.g.
   # the account for attribute groups, or a folder for documents.
   class ResourceList < Object
-    def initialize(data, parent_object, kind, client)
+    def initialize(data, parent_object, kind, client, method_override: nil)
       @parent_object = parent_object
       @kind = kind
+      @method_override = method_override
       super(data, client)
     end
 
@@ -45,9 +46,13 @@ module Springcm
       @parent_object.send(method, offset: offset, limit: limit)
     end
 
+    # TODO: Better pattern for generating related links
+    #       Possibly a Springcm::DocumentVersion object?
     def method_for_kind!(kind)
       method = nil
-      if kind == Springcm::Folder
+      if !@method_override.nil?
+        method = @method_override
+      elsif kind == Springcm::Folder
         method = :folders
       elsif kind == Springcm::Document
         method = :documents

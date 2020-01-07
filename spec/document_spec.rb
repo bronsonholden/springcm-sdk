@@ -4,6 +4,7 @@ RSpec.describe Springcm::Document do
   let(:documents) { folder.documents }
   let(:document) { documents.items.first.reload }
   let(:history) { document.history }
+  let(:versions) { document.versions }
   let(:trashy) { client.document(uid: "86592c45-e907-ea11-9c2b-3ca82a1e3f41") }
   let(:in_trash) { DocumentBuilder.new(client).delete!.build }
 
@@ -49,6 +50,15 @@ RSpec.describe Springcm::Document do
         expect(history).to be_a(Springcm::ResourceList)
         expect(history.next).to be_a(Springcm::ResourceList)
         expect(history.next.prev).to be_a(Springcm::ResourceList)
+      end
+    end
+
+    describe "versions" do
+      it "is a resource list" do
+        expect(versions).to be_a(Springcm::ResourceList)
+        expect(versions.next).to be_a(Springcm::ResourceList)
+        expect(versions.next.prev).to be_a(Springcm::ResourceList)
+        expect(versions.items).to all(be_a(Springcm::Document))
       end
     end
 

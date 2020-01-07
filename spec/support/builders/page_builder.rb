@@ -2,7 +2,8 @@ require "springcm-sdk/folder"
 
 # Builder for paged lists of arbitrary SpringCM objects, e.g. Documents.
 class PageBuilder
-  def initialize(base_href, kind, client)
+  def initialize(base_href, kind, client, resource_override: nil)
+    @resource_override = resource_override
     @kind = kind
     @client = client
     @base_href = base_href
@@ -57,8 +58,11 @@ class PageBuilder
 
   protected
 
+  # TODO: Better pattern for generating related links
   def plural_resource_for_kind(kind)
-    if @kind == Springcm::Folder
+    if !@resource_override.nil?
+      @resource_override
+    elsif @kind == Springcm::Folder
       return "folders"
     elsif @kind == Springcm::Document
       return "documents"

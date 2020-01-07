@@ -31,6 +31,22 @@ module Springcm
       end
     end
 
+    def versions(offset: 0, limit: 20)
+      Helpers.validate_offset_limit!(offset, limit)
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.get do |req|
+        req.url "#{resource_uri}/versions"
+        req.params["offset"] = offset
+        req.params["limit"] = limit
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        ResourceList.new(data, self, Document, @client, method_override: :versions)
+      else
+        nil
+      end
+    end
+
     def delete!
       unsafe_delete
     end
