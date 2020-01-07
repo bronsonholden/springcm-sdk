@@ -51,6 +51,13 @@ class DocumentBuilder < Builder
     end
   }
 
+  property :version, default: 0, validate: -> (*args) {
+    ver = args.first
+    if ver < 1
+      raise ArgumentError.new("Invalid document version (must be a positive, non-zero Integer)")
+    end
+  }
+
   def build
     Springcm::Document.new(data, client)
   end
@@ -62,7 +69,7 @@ class DocumentBuilder < Builder
   end
 
   def data
-    {
+    data = {
       "Name" => "#{name}",
       "CreatedDate" => "#{created_date.strftime("%FT%T.%3NZ")}",
       "CreatedBy" => "#{created_by}",
@@ -74,9 +81,11 @@ class DocumentBuilder < Builder
         "Href" => "#{client.object_api_url}/folders/c0ca34aa-3774-e611-bb8d-6c3be5a75f4d"
       },
       "Path" => path,
-      "HistoryItems" => {
+      # Although you can retrieve history for a specific version, the related
+      # link is not provided in the JSON document for a version.
+      "HistoryItems" => version == 0 ? {
         "Href" => "#{client.object_api_url}/documents/#{uid}/historyitems"
-      },
+      } : nil,
       "AccessLevel" => {
         "See" => access.include?(:see),
         "Read" => access.include?(:read),
@@ -189,6 +198,7 @@ class DocumentBuilder < Builder
         }
       },
       "PageCount" => page_count,
+      "Version" => version > 0 ? "#{version}.0" : nil,
       "Lock" => {
         "Href" => "#{client.object_api_url}/documents/#{uid}/lock"
       },
@@ -217,6 +227,8 @@ class DocumentBuilder < Builder
       "PdfFileSize" => file_size,
       "Href" => "#{client.object_api_url}/documents/#{uid}"
     }
+
+    data.reject { |key, value| value.nil? }
   end
 
   def itemized_data

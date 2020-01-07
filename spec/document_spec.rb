@@ -51,5 +51,26 @@ RSpec.describe Springcm::Document do
         expect(history.next.prev).to be_a(Springcm::ResourceList)
       end
     end
+
+    context "versioned" do
+      let(:versioned) { DocumentBuilder.new(client).version(2) }
+      let(:document_version) { versioned.build }
+
+      it "includes Version" do
+        expect(document_version.version).to eq("2.0")
+      end
+
+      it "does not include HistoryItems" do
+        expect { document_version.history_items }.to raise_error(NoMethodError)
+      end
+
+      it "includes AttributeGroups" do
+        expect { document_version.attribute_groups }.not_to raise_error
+      end
+
+      it "includes Path" do
+        expect { document_version.path }.not_to raise_error
+      end
+    end
   end
 end
