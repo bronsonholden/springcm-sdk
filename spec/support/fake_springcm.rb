@@ -65,6 +65,56 @@ class FakeSpringcm < FakeService
     json_response 200, builder.build.to_json
   end
 
+  get "/v201411/groups" do
+    account = AccountBuilder.new(client)
+    builder = PageBuilder.new(account.build.href, Springcm::Group, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.times do
+      group = GroupBuilder.new(client).uid(UUID.generate)
+      builder.add(group)
+    end
+    json_response 200, builder.build.to_json
+  end
+
+  get "/v201411/groups/:group_uid" do
+    group = GroupBuilder.new(client).uid(params["group_uid"])
+    json_response 200, group.data.to_json
+  end
+
+  get "/v201411/groups/:group_uid/groupmembers" do
+    group = GroupBuilder.new(client).uid(params["group_uid"])
+    builder = PageBuilder.new(group.build.href, Springcm::User, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.times do
+      user = UserBuilder.new(client).uid(UUID.generate)
+      builder.add(user)
+    end
+    json_response 200, builder.build.to_json
+  end
+
+  get "/v201411/users" do
+    account = AccountBuilder.new(client)
+    builder = PageBuilder.new(account.build.href, Springcm::User, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.times do
+      user = UserBuilder.new(client).uid(UUID.generate)
+      builder.add(user)
+    end
+    json_response 200, builder.build.to_json
+  end
+
+  get "/v201411/users/:user_uid" do
+    user = UserBuilder.new(client).uid(params["user_uid"])
+    json_response 200, user.data.to_json
+  end
+
+  get "/v201411/users/:user_uid/groups" do
+    user = UserBuilder.new(client).uid(params["user_uid"])
+    builder = PageBuilder.new(user.build.href, Springcm::Group, client).offset(params.fetch(:offset, 0).to_i).limit(params.fetch(:limit, 20).to_i)
+    50.times do
+      group = GroupBuilder.new(client).uid(UUID.generate)
+      builder.add(group)
+    end
+    json_response 200, builder.build.to_json
+  end
+
   get "/v201411/attributegroups/:attributegroup_uid" do
     builder = AttributeGroupBuilder.new(client).uid(params["attributegroup_uid"])
     json_response 200, builder.data.to_json

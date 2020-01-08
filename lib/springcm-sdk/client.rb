@@ -159,6 +159,38 @@ module Springcm
       end
     end
 
+    def groups(offset: 0, limit: 20)
+      Helpers.validate_offset_limit!(offset, limit)
+      conn = authorized_connection(url: object_api_url)
+      res = conn.get do |req|
+        req.url "groups"
+        req.params["offset"] = offset
+        req.params["limit"] = limit
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        ResourceList.new(data, self, Group, self)
+      else
+        nil
+      end
+    end
+
+    def users(offset: 0, limit: 20)
+      Helpers.validate_offset_limit!(offset, limit)
+      conn = authorized_connection(url: object_api_url)
+      res = conn.get do |req|
+        req.url "users"
+        req.params["offset"] = offset
+        req.params["limit"] = limit
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        ResourceList.new(data, self, User, self)
+      else
+        nil
+      end
+    end
+
     # Check if client is successfully authenticated
     # @return [Boolean] Whether a valid, unexpired access token is held.
     def authenticated?
