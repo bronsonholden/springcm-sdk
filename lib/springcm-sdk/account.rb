@@ -22,6 +22,7 @@ module Springcm
     # you can call #all_attribute_groups instead, as attribute group
     # configurations do not frequently change.
     def attribute_groups(offset: 0, limit: 20)
+      Helpers.validate_offset_limit!(offset, limit)
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.get do |req|
         req.url "accounts/current/attributegroups"
