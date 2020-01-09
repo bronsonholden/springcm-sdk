@@ -1,5 +1,6 @@
 require "springcm-sdk/resource"
 require "springcm-sdk/resource_list"
+require "springcm-sdk/change_security_task"
 require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/parent_folder"
 require "springcm-sdk/mixins/documents"
@@ -68,6 +69,37 @@ module Springcm
         data = JSON.parse(res.body)
         ResourceList.new(data, self, Document, @client)
       else
+        nil
+      end
+    end
+
+    def update_security(group:, access:)
+      Helpers.validate_access!(access)
+      if !group.is_a?(Springcm::Group)
+        raise ArgumentError.new("Invalid group; must be a Springcm::Group")
+      end
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.post do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.url "changesecuritytasks"
+        req.body = {
+          "Status" => "",
+          "Security" => {
+            "Groups" => [
+              {
+                "Item" => group.raw,
+                "AccessType" => access.to_s.split('_').map(&:capitalize).join
+              }
+            ]
+          },
+          "Folder" => raw
+        }.to_json
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        ChangeSecurityTask.new(data, @client)
+      else
+        puts res.body
         nil
       end
     end

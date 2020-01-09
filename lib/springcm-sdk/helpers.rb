@@ -46,5 +46,20 @@ module Springcm
         value
       end
     end
+
+    def self.validate_access!(access)
+      access_types = [
+        :inherit_from_parent_folder,
+        :no_access,
+        :view,
+        :view_create,
+        :view_edit,
+        :view_edit_delete,
+        :view_edit_delete_set_access
+      ]
+      if !access_types.include?(access)
+        raise ArgumentError.new("Access must be one of: #{access_types.map(&:inspect).join(", ")}")
+      end
+    end
   end
 end

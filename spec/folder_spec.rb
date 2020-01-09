@@ -7,6 +7,7 @@ RSpec.describe Springcm::Folder do
   let(:first_list) { folder_list.first }
   let(:last_list) { folder_list.last }
   let(:garbo) { client.folder(uid: "a8765e66-280a-ea11-b808-48df378a7098") }
+  let(:group) { client.groups.items.first.get }
 
   def self.test_valid_attribute(m, expected_value=nil)
     it "#{m.to_s} is retrieved" do
@@ -118,6 +119,20 @@ RSpec.describe Springcm::Folder do
 
     it "retrieves last set of folders" do
       expect(last_list.items).to all(be_a(Springcm::Folder))
+    end
+
+    describe "security" do
+      it "rejects invalid access" do
+        expect { folder.update_security(group: group, access: :fake_access) }.to raise_error(ArgumentError)
+      end
+
+      it "rejects invalid groups" do
+        expect { folder.update_security(group: 0, access: :view) }.to raise_error(ArgumentError)
+      end
+
+      it "sets access" do
+        expect(folder.update_security(group: group, access: :view)).to be_a(Springcm::ChangeSecurityTask)
+      end
     end
   end
 end
