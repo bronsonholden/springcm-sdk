@@ -50,4 +50,10 @@ module Springcm
       super("Refused to delete #{path}, use #delete! instead.")
     end
   end
+
+  class ChangeSecurityTaskAwaitTimeout < Error
+    def initialize
+      super("Timed out while awaiting ChangeSecurityTask to complete.")
+    end
+  end
 end

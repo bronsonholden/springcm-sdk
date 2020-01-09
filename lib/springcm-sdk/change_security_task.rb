@@ -9,6 +9,7 @@ module Springcm
         interval *= backoff
         tries -= 1
       end
+      raise Springcm::ChangeSecurityTaskAwaitTimeout.new
     end
 
     def complete?
