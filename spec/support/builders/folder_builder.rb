@@ -41,12 +41,12 @@ class FolderBuilder < Builder
   end
 
   def build
-    nil if !valid?
+    return nil if !valid?
     Springcm::Folder.new(data, client)
   end
 
   def valid?
-    !@uid.nil?
+    !uid.nil?
   end
 
   def data

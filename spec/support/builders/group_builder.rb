@@ -19,12 +19,12 @@ class GroupBuilder < Builder
   property :updated_date, default: Time.utc(2000, "jan", 1, 0, 0, 0)
 
   def build
-    nil if !valid?
+    return nil if !valid?
     Springcm::Group.new(data, client)
   end
 
   def valid?
-    !@uid.nil?
+    !uid.nil?
   end
 
   def data

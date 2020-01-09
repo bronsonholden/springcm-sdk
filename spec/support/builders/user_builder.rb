@@ -18,12 +18,12 @@ class UserBuilder < Builder
   property :managed_by, type: Springcm::User
 
   def build
-    nil if !valid?
+    return nil if !valid?
     Springcm::User.new(data, client)
   end
 
   def valid?
-    !@uid.nil?
+    !uid.nil?
   end
 
   def data
