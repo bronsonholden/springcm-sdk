@@ -3,6 +3,7 @@ require "json"
 require "springcm-sdk/account"
 require "springcm-sdk/folder"
 require "springcm-sdk/document"
+require "springcm-sdk/group"
 require "springcm-sdk/middleware"
 
 module Springcm
