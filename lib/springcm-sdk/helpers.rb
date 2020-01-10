@@ -13,6 +13,7 @@ module Springcm
 
     def self.serialize_field(field_config, value)
       type = field_config.type
+      name = field_config.name
       repeating = field_config.repeating_attribute?
       serialized = {
         "AttributeType" => type,
