@@ -221,6 +221,13 @@ class FakeSpringcm < FakeService
     json_response 200, builder.data.to_json
   end
 
+  get "/v201411/changesecuritytasks/:task_uid" do
+    folder = FolderBuilder.new(client).uid(UUID.generate).build
+    group = GroupBuilder.new(client).uid(UUID.generate).build
+    builder = ChangeSecurityTaskBuilder.new(client).uid(params["task_uid"]).folder(folder).group(group).status("Waiting")
+    json_response 200, builder.data.to_json
+  end
+
   post "/v201411/changesecuritytasks" do
     folder = FolderBuilder.new(client).uid(UUID.generate).build
     group = GroupBuilder.new(client).uid(UUID.generate).build
