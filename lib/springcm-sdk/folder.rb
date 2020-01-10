@@ -78,6 +78,9 @@ module Springcm
       if !group.is_a?(Springcm::Group)
         raise ArgumentError.new("Invalid group; must be a Springcm::Group")
       end
+      if group.group_type != "Security"
+        raise ArgumentError.new("Invalid group type; must be a security group")
+      end
       conn = @client.authorized_connection(url: @client.object_api_url)
       res = conn.post do |req|
         req.headers["Content-Type"] = "application/json"
