@@ -1,8 +1,13 @@
+require "uuid"
 require "springcm-sdk/user"
 require_relative "builder"
 
 # Builder for SpringCM ChangeSecurityTasks.
 class ChangeSecurityTaskBuilder < Builder
+  property :uid, default: UUID.generate, validate: -> (uid) {
+    raise ArgumentError.new("Invalid UID #{uid.inspect}") if !UUID.validate(uid)
+  }
+
   property :status, default: "Waiting", validate: -> (status) {
     status_values = ["Waiting", "Success"]
     if !status_values.include?(status)
