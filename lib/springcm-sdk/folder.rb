@@ -102,7 +102,6 @@ module Springcm
         data = JSON.parse(res.body)
         ChangeSecurityTask.new(data, @client)
       else
-        puts res.body
         nil
       end
     end
