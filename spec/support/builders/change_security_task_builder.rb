@@ -27,7 +27,7 @@ class ChangeSecurityTaskBuilder < Builder
   end
 
   def valid?
-    !@uid.nil? && !folder.nil? && !group.nil?
+    !uid.nil? && !folder.nil? && !group.nil?
   end
 
   def data
