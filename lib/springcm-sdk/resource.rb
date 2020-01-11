@@ -13,6 +13,12 @@ module Springcm
       get
     end
 
+    # Resend a request to the API for this resource and modify the data for
+    # the current object in-place.
+    def reload!
+      @data = reload.raw
+    end
+
     # Send a GET request for this resource.
     def get
       conn = @client.authorized_connection(url: @client.object_api_url)

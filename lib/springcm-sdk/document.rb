@@ -72,7 +72,7 @@ module Springcm
     private :unsafe_delete
 
     def delete
-      reload
+      reload!
       if path.start_with?("/#{@client.account.name}/Trash")
         raise Springcm::DeleteRefusedError.new(path)
       end

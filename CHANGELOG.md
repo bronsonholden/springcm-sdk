@@ -7,6 +7,7 @@ All notable changes to springcm-sdk will be documented in this file.
 * Document versions via #versions method. Document versions behave much like
   normal Documents, but have some different behaviors.
 * Document#download method.
+* Resource#reload! method, to reload a resource object in-place.
 
 ### Changed
 * Path is expanded when retrieving individual Folders.
