@@ -6,6 +6,7 @@ require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/parent_folder"
 require "springcm-sdk/mixins/documents"
 require "springcm-sdk/helpers"
+require "uri"
 
 module Springcm
   class Folder < Resource
@@ -69,6 +70,31 @@ module Springcm
       if res.success?
         data = JSON.parse(res.body)
         ResourceList.new(data, self, Document, @client)
+      else
+        nil
+      end
+    end
+
+    def upload(name:, file:, type: :binary)
+      file_types = {
+        binary: "application/octet-stream",
+        pdf: "application/pdf",
+        csv: "text/csv",
+        txt: "text/plain"
+      }
+      if !type.nil? && !file_types.keys.include?(type)
+        raise ArgumentError.new("File type must be one of: nil, #{file_types.map(&:inspect).join(", ")}")
+      end
+      conn = @client.authorized_connection(url: @client.upload_api_url)
+      res = conn.post do |req|
+        req.headers["Content-Type"] = file_types[type]
+        req.headers["Content-Length"] = file.size.to_s
+        req.url "folders/#{uid}/documents?name=#{URI.escape(name)}"
+        req.body = file
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        Document.new(data, @client)
       else
         nil
       end
