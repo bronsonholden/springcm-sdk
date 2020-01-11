@@ -26,6 +26,7 @@ module Springcm
         end
       end
       if res.success?
+        io.rewind
         io
       else
         nil
