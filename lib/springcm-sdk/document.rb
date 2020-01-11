@@ -1,6 +1,7 @@
 require "springcm-sdk/resource"
 require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/attributes"
+require "springcm-sdk/mixins/parent_folder"
 require "springcm-sdk/history_item"
 
 module Springcm

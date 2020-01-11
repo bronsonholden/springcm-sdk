@@ -1,4 +1,5 @@
 require "springcm-sdk/resource"
+require "springcm-sdk/document"
 require "springcm-sdk/resource_list"
 require "springcm-sdk/change_security_task"
 require "springcm-sdk/mixins/access_level"
