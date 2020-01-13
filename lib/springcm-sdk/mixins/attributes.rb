@@ -42,14 +42,14 @@ module Springcm
         # Repeating set
         if !field_set_config.nil? && field_set_config["RepeatingAttribute"]
           set_name = field_set_config["Name"]
-          set_data = group_data.fetch(set_name, {})
+          set_data = group_data.fetch(set_name, { "Items"=>[] })
           field_data = {
             "#{field}" => Springcm::Helpers.serialize_field(field_config, value)
           }
           if mode == :insert
             set_data["Items"].insert(index || -1, field_data)
           elsif
-            set_data["Items"][index] = field_data
+            set_data["Items"][index].merge!(field_data)
           end
           set_data["Items"].reject!(&:nil?)
           group_data[set_name] = set_data

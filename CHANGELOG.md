@@ -3,6 +3,10 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+## [0.6.1] - 2020-01-13
+### Changed
+* Fix bug with set_attribute on repeatable set data when attribute group is not already applied - empty array of items is created.
+* Fix bug with replacing index data (mode `:replace`) in repeating sets - new data is now merged into existing set data instead of replacing it.
 
 ## [0.6.0] - 2020-01-13
 ### Added
@@ -140,3 +144,4 @@ All notable changes to springcm-sdk will be documented in this file.
 [0.4.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.4.0
 [0.5.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.5.0
 [0.6.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.6.0
+[0.6.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.6.1
