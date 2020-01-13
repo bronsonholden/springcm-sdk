@@ -3,11 +3,15 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+
+## [0.6.0] - 2020-01-13
 ### Added
 * Document versions via #versions method. Document versions behave much like
   normal Documents, but have some different behaviors.
 * Document#download method.
 * Resource#reload! method, to reload a resource object in-place.
+* Security setting updates for Folders.
+* Users and Groups.
 
 ### Changed
 * Path is expanded when retrieving individual Folders.
@@ -135,3 +139,4 @@ All notable changes to springcm-sdk will be documented in this file.
 [0.3.6]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.3.6
 [0.4.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.4.0
 [0.5.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.5.0
+[0.6.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.6.0
