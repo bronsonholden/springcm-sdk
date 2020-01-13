@@ -6,7 +6,11 @@ RSpec.describe Springcm::Document do
   let(:history) { document.history }
   let(:versions) { document.versions }
   let(:trashy) { client.document(uid: "86592c45-e907-ea11-9c2b-3ca82a1e3f41") }
-  let(:in_trash) { DocumentBuilder.new(client).delete!.build }
+  let(:in_trash) {
+    doc = DocumentBuilder.new(client).uid(UUID.generate).build
+    doc.delete
+    doc.reload
+  }
 
   context "document API" do
     before(:each) do

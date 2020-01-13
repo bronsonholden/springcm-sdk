@@ -6,6 +6,7 @@ class FakeSpringcm < FakeService
   @@ratelimit = true
   @@auth_expired = true
   @@access_token = nil
+  @@deleted_documents = Set.new
 
   def initialize
     @root_uid = UUID.generate
@@ -188,6 +189,9 @@ class FakeSpringcm < FakeService
 
   get "/v201411/documents/:document_uid" do
     builder = DocumentBuilder.new(client).uid(params[:document_uid])
+    if @@deleted_documents.include?(params[:document_uid])
+      builder.delete!
+    end
     json_response 200, builder.data.to_json
   end
 
@@ -218,6 +222,7 @@ class FakeSpringcm < FakeService
 
   delete "/v201411/documents/:document_uid" do
     builder = DocumentBuilder.new(client).uid(params[:document_uid])
+    @@deleted_documents << params[:document_uid]
     json_response 200, builder.data.to_json
   end
 
