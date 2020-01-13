@@ -17,6 +17,7 @@ module Springcm
     # the current object in-place.
     def reload!
       @data = reload.raw
+      self
     end
 
     # Send a GET request for this resource.
