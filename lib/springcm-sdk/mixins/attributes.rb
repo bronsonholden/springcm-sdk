@@ -49,8 +49,10 @@ module Springcm
           if mode == :insert
             set_data["Items"].insert(index || -1, field_data)
           elsif
-            set_data["Items"][index].merge!(field_data)
+            set = set_data["Items"][index] || {}
+            set.merge!(field_data)
           end
+          set_data["Items"][index] = set
           set_data["Items"].reject!(&:nil?)
           group_data[set_name] = set_data
         else
