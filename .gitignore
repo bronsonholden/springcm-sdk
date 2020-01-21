@@ -3,3 +3,4 @@ springcm-sdk-*.gem
 coverage
 .yardoc
 doc
+**/.DS_Store
