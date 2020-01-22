@@ -3,6 +3,9 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Changed
+* New API for retrieving and modifying applied attributes on documents and folders
+
 ## [0.6.1] - 2020-01-13
 ### Changed
 * Fix bug with set_attribute on repeatable set data when attribute group is not already applied - empty array of items is created.

@@ -31,7 +31,7 @@ class Builder
     return super if !property_keys.include?(m)
 
     # If no args, behave like a getter
-    if !args.any?
+    if args.empty?
       prop = @values[m]
       if prop.is_a?(Proc)
         prop = prop.call(self)

@@ -1,4 +1,5 @@
 require "springcm-sdk/resource"
+require "springcm-sdk/applied_attribute_group"
 require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/attributes"
 require "springcm-sdk/mixins/parent_folder"

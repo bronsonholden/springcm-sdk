@@ -53,6 +53,40 @@ module Springcm
       }
     end
 
+    def template
+      group = {}
+      attributes_config.each { |attribute|
+        type = attribute["Type"]
+        if type == "DynamicDropDown"
+          type = "MagicDropdown" # Not sure why they do this for applied groups, but oh well
+        end
+        repeating = attribute["RepeatingAttribute"]
+        attr = {
+          "AttributeType" => type,
+          "RepeatingAttribute" => repeating
+        }
+        if attribute.key?("Attributes") # If it's a set
+          attr["AttributeType"] = "Set"
+          set = attr
+          if repeating
+            set = {}
+            attr["Items"] = [set]
+          end
+          attribute["Attributes"].each { |field|
+            set[field["Name"]] = {
+              "AttributeType" => field["Type"],
+              "RepeatingAttribute" => false
+            }
+          }
+        elsif repeating
+          # Must have empty array for repeating plain fields
+          attr["Value"] = []
+        end
+        group[attribute["Name"]] = attr
+      }
+      group
+    end
+
     protected
 
     def attributes_config

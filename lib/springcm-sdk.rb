@@ -21,6 +21,12 @@ module Springcm
     end
   end
 
+  class NoAttributeSetError < Error
+    def initialize(group, set)
+      super("No such attribute set: #{group}.#{set}")
+    end
+  end
+
   class NoAttributeFieldError < Error
     def initialize(group, field)
       super("No such attribute field: #{group}.#{field}")
@@ -54,6 +60,30 @@ module Springcm
   class ChangeSecurityTaskAwaitTimeout < Error
     def initialize
       super("Timed out while awaiting ChangeSecurityTask to complete.")
+    end
+  end
+
+  class RepeatableAttributeSetUsageError < Error
+    def initialize(group, set)
+      super("The attribute set #{group}.#{set} is repeatable. Use #[] to access and modify fields.")
+    end
+  end
+
+  class NonRepeatableAttributeSetUsageError < Error
+    def initialize(group, set)
+      super("The attribute set #{group}.#{set} is not repeatable. Use #field to access and modify fields.")
+    end
+  end
+
+  class RepeatableAttributeFieldUsageError < Error
+    def initialize(group, field)
+      super("The attribute field #{group}.#{field} is repeatable. Use #[] to access and modify values.")
+    end
+  end
+
+  class NonRepeatableAttributeFieldUsageError < Error
+    def initialize(group, field)
+      super("The attribute field #{group}.#{field} is not repeatable. Use #field to access and modify values.")
     end
   end
 end

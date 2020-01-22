@@ -4,6 +4,8 @@ require_relative "builder"
 
 # Builder for SpringCM Documents.
 class DocumentBuilder < Builder
+  @@no_attributes_documents = Set.new
+
   property :uid, default: UUID.generate, validate: -> (uid) {
     raise ArgumentError.new("Invalid UID #{uid.inspect}") if !UUID.validate(uid)
   }
@@ -59,13 +61,22 @@ class DocumentBuilder < Builder
   }
 
   def build
-    Springcm::Document.new(data, client)
+    document = data
+    if @@no_attributes_documents.include?(uid)
+      document["AttributeGroups"] = {}
+    end
+    Springcm::Document.new(document, client)
   end
 
   def delete!
     trash_folder = FolderBuilder.new(@client).name("Trash")
     date_folder = FolderBuilder.new(@client).name(DateTime.now.strftime("%Y%m%d")).parent(trash_folder.build)
     self.parent(date_folder.build)
+  end
+
+  def no_attributes!
+    @@no_attributes_documents << uid
+    self
   end
 
   def data
@@ -117,6 +128,11 @@ class DocumentBuilder < Builder
                   "AttributeType" => "String",
                   "RepeatingAttribute" => false,
                   "Value" => "1"
+                },
+                "Repeatable Attribute Set Field 2" => {
+                  "AttributeType" => "String",
+                  "RepeatingAttribute" => false,
+                  "Value" => "1.2"
                 }
               },
               {
@@ -124,6 +140,11 @@ class DocumentBuilder < Builder
                   "AttributeType" => "String",
                   "RepeatingAttribute" => false,
                   "Value" => "2"
+                },
+                "Repeatable Attribute Set Field 2" => {
+                  "AttributeType" => "String",
+                  "RepeatingAttribute" => false,
+                  "Value" => "2.2"
                 }
               },
               {
@@ -131,6 +152,11 @@ class DocumentBuilder < Builder
                   "AttributeType" => "String",
                   "RepeatingAttribute" => false,
                   "Value" => "3"
+                },
+                "Repeatable Attribute Set Field 2" => {
+                  "AttributeType" => "String",
+                  "RepeatingAttribute" => false,
+                  "Value" => "3.2"
                 }
               }
             ],

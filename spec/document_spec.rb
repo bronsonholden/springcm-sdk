@@ -49,6 +49,18 @@ RSpec.describe Springcm::Document do
       expect(documents.items).to all(be_a(Springcm::Document))
     end
 
+    describe "attributes" do
+      let(:uid) { UUID.generate }
+      let(:document) { DocumentBuilder.new(client).uid(uid).no_attributes!.build }
+
+      it "applies attribute group" do
+        doc = document
+        doc.apply_attribute_group("Attribute Group")
+        # puts doc.raw
+        # expect(doc.attribute_group(name: "Attribute Group")).to be_a(Springcm::AppliedAttributeGroup)
+      end
+    end
+
     describe "download" do
       it "downloads file" do
         expect(document.download).to be_a(StringIO)

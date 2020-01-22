@@ -57,6 +57,13 @@ class AttributeGroupBuilder < Builder
             "Type" => "String",
             "Name" => "Repeatable Attribute Set Field",
             "RepeatingAttribute" => false
+          },
+          {
+            "Required" => false,
+            "ReadOnly" => false,
+            "Type" => "String",
+            "Name" => "Repeatable Attribute Set Field 2",
+            "RepeatingAttribute" => false
           }
         ],
         "Name" => "Repeatable Attribute Set",

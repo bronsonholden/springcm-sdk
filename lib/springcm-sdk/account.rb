@@ -37,6 +37,15 @@ module Springcm
       end
     end
 
+    def attribute_group(name: nil, uid: nil)
+      if (name.nil? && uid.nil?) || (!name.nil? && !uid.nil?)
+        raise ArgumentError.new("Specify exactly one of: name, uid")
+      end
+      all_attribute_groups.select { |group|
+        (!name.nil? && group.name == name) || (!uid.nil? && group.uid == uid)
+      }.first
+    end
+
     private
 
     def load_all_attribute_groups
