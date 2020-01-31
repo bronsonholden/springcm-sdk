@@ -5,6 +5,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ## [Unreleased]
 ### Changed
 * New API for retrieving and modifying applied attributes on documents and folders
+* Folders now include attribute API.
 
 ## [0.6.1] - 2020-01-13
 ### Changed
