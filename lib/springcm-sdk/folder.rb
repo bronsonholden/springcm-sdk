@@ -13,6 +13,7 @@ module Springcm
     include Springcm::Mixins::AccessLevel
     include Springcm::Mixins::ParentFolder
     include Springcm::Mixins::Documents
+    include Springcm::Mixins::Attributes
 
     def self.resource_params
       {
