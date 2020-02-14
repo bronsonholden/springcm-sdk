@@ -26,10 +26,10 @@ module Springcm
       field_data = nil
       if set_config.nil?
         field_data = raw[field_name]
-      elsif set_config.repeating_attribute?
+      elsif set_config["RepeatingAttribute"]
         raise RepeatableAttributeSetUsageError.new(group.name, name)
       else
-        field_data = raw[set_config.name]["Attributes"][field_name]
+        field_data = raw[set_config["Name"]][field_name]
       end
       AppliedAttributeField.new(field_data, field_name, subject, self, nil, @client)
     end
