@@ -4,6 +4,10 @@ All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.1] - 2020-02-14 ❤️
+### Fixed
+* Bug with retrieving set fields
+
 ## [1.0.0] - 2020-02-14 ❤️
 ### Added
 * Setting object JSON properties
