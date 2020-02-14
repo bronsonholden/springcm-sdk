@@ -3,9 +3,15 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
-### Changed
+
+## [1.0.0] - 2020-02-14 ❤️
+### Added
+* Setting object JSON properties
 * New API for retrieving and modifying applied attributes on documents and folders
 * Folders now include attribute API.
+
+### Removed
+* Old attribute API
 
 ## [0.6.1] - 2020-01-13
 ### Changed
@@ -149,3 +155,4 @@ All notable changes to springcm-sdk will be documented in this file.
 [0.5.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.5.0
 [0.6.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.6.0
 [0.6.1]: https://github.com/paulholden2/springcm-sdk/releases/tag/0.6.1
+[1.0.0]: https://github.com/paulholden2/springcm-sdk/releases/tag/1.0.0
