@@ -15,9 +15,19 @@ module Springcm
     # for retrieving data deeper in the JSON document, e.g. documents_href
     # via Springcm::Mixins::Documents.
     def method_missing(m, *args, &block)
-      key = m.to_s.split("_").map(&:capitalize).join
+      mode = :get
+      method = m.to_s
+      if method.end_with?("=")
+        mode = :set
+        method = method[0...-1]
+      end
+      key = method.split("_").map(&:capitalize).join
       if @data.key?(key)
-        @data.fetch(key)
+        if mode == :get
+          @data.fetch(key)
+        else
+          @data[key] = args.first
+        end
       else
         super
       end
