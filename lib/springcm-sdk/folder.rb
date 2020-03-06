@@ -77,6 +77,7 @@ module Springcm
     end
 
     def upload(name:, file:, type: :binary)
+      # TODO: DRY Document#upload_version
       file_types = {
         binary: "application/octet-stream",
         pdf: "application/pdf",

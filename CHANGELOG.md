@@ -4,6 +4,9 @@ All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+* Document#upload_version method to check in a new version of a Document.
+
 ## [1.0.1] - 2020-02-14 ❤️
 ### Fixed
 * Bug with retrieving set fields

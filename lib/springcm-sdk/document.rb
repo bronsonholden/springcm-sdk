@@ -66,6 +66,34 @@ module Springcm
       end
     end
 
+    def upload_version(file:, type: :binary)
+      # TODO: DRY Folder#upload
+      file_types = {
+        binary: "application/octet-stream",
+        pdf: "application/pdf",
+        csv: "text/csv",
+        txt: "text/plain"
+      }
+      if !type.nil? && !file_types.keys.include?(type)
+        raise ArgumentError.new("File type must be one of: nil, #{file_types.map(&:inspect).join(", ")}")
+      end
+      conn = @client.authorized_connection(url: @client.upload_api_url)
+      res = conn.post do |req|
+        req.headers["Content-Type"] = file_types[type]
+        req.headers["Content-Length"] = file.size.to_s
+        req.headers["Content-Disposition"] = "attachment; filename=\"#{name}\""
+        req.url "documents/#{uid}"
+        req.body = file
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        Document.new(data, @client)
+      else
+        nil
+        puts res.body
+      end
+    end
+
     def delete!
       unsafe_delete
     end
