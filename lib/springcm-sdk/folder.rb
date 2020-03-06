@@ -101,6 +101,8 @@ module Springcm
       end
     end
 
+    # access
+    # InheritFromParentFolder, NoAccess, View, ViewCreate, ViewEdit, ViewEditDelete, ViewEditDeleteSetAccess
     def update_security(group:, access:)
       Helpers.validate_access!(access)
       if !group.is_a?(Springcm::Group)
