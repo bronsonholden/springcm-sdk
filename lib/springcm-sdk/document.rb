@@ -94,6 +94,26 @@ module Springcm
       end
     end
 
+    def copy(path: nil, uid: nil)
+      parent = @client.folder(path: path, uid: uid)
+      body = {
+        "DestinationFolder" => parent.raw,
+        "DocumentsToCopy" => [ raw ]
+      }
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.post do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.url "copytasks"
+        req.body = body.to_json
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        CopyTask.new(data, @client)
+      else
+        nil
+      end
+    end
+
     def delete!
       unsafe_delete
     end

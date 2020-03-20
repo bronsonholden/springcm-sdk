@@ -86,4 +86,10 @@ module Springcm
       super("The attribute field #{group}.#{field} is not repeatable. Use #field to access and modify values.")
     end
   end
+
+  class CopyTaskAwaitTimeout < Error
+    def initialize
+      super("Timed out while awaiting CopyTask to complete.")
+    end
+  end
 end

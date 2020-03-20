@@ -2,6 +2,7 @@ require "springcm-sdk/resource"
 require "springcm-sdk/document"
 require "springcm-sdk/resource_list"
 require "springcm-sdk/change_security_task"
+require "springcm-sdk/copy_task"
 require "springcm-sdk/mixins/access_level"
 require "springcm-sdk/mixins/parent_folder"
 require "springcm-sdk/mixins/documents"
@@ -132,6 +133,26 @@ module Springcm
       if res.success?
         data = JSON.parse(res.body)
         ChangeSecurityTask.new(data, @client)
+      else
+        nil
+      end
+    end
+
+    def copy(path: nil, uid: nil)
+      parent = @client.folder(path: path, uid: uid)
+      body = {
+        "DestinationFolder" => parent.raw,
+        "FoldersToCopy" => [ raw ]
+      }
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.post do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.url "copytasks"
+        req.body = body.to_json
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        CopyTask.new(data, @client)
       else
         nil
       end

@@ -3,6 +3,9 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Added
+* Folder#copy method
+* Document#copy method
 
 ## [1.1.0] - 2020-03-06
 ### Added
