@@ -138,6 +138,16 @@ class FakeSpringcm < FakeService
     end
   end
 
+  post "/v201411/folders" do
+    builder = FolderBuilder.new(client)
+    parent_builder = FolderBuilder.new(client)
+    body = JSON.parse(request.body.read)
+    builder.parent(Springcm::Folder.new(body["ParentFolder"], client))
+    builder.uid(UUID.generate)
+    builder.name(body["Name"])
+    json_response 201, builder.data.to_json
+  end
+
   get "/v201411/folders/:folder_uid" do
     builder = FolderBuilder.new(client).uid(params[:folder_uid])
     json_response 200, builder.data.to_json

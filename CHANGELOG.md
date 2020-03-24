@@ -3,6 +3,8 @@
 All notable changes to springcm-sdk will be documented in this file.
 
 ## [Unreleased]
+### Added
+* Folder#create_folder method
 
 ## [1.2.0] - 2020-03-20 🎂
 ### Added

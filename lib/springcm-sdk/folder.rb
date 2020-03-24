@@ -138,6 +138,24 @@ module Springcm
       end
     end
 
+    def create_folder(name:)
+      conn = @client.authorized_connection(url: @client.object_api_url)
+      res = conn.post do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.url "folders"
+        req.body = {
+          "ParentFolder" => raw,
+          "Name" => name
+        }.to_json
+      end
+      if res.success?
+        data = JSON.parse(res.body)
+        Folder.new(data, @client)
+      else
+        nil
+      end
+    end
+
     def copy(path: nil, uid: nil)
       parent = @client.folder(path: path, uid: uid)
       body = {

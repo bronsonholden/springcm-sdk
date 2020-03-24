@@ -8,6 +8,7 @@ RSpec.describe Springcm::Folder do
   let(:last_list) { folder_list.last }
   let(:garbo) { client.folder(uid: "a8765e66-280a-ea11-b808-48df378a7098") }
   let(:group) { client.groups.items.first.get }
+  let(:created_subfolder) { folder.create_folder(name: "Subfolder") }
 
   def self.test_valid_attribute(m, expected_value=nil)
     it "#{m.to_s} is retrieved" do
@@ -47,6 +48,12 @@ RSpec.describe Springcm::Folder do
   context "folder API" do
     before(:each) do
       client.connect!
+    end
+
+    it "can create subfolder" do
+      expect(created_subfolder).to be_a(Springcm::Folder)
+      expect(created_subfolder.name).to eq("Subfolder")
+      expect(created_subfolder.parent_folder.uid).to eq(folder.uid)
     end
 
     it "can be reloaded" do
