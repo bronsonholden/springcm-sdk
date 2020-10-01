@@ -90,7 +90,6 @@ module Springcm
         Document.new(data, @client)
       else
         nil
-        puts res.body
       end
     end
 
