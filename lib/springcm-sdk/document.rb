@@ -93,6 +93,11 @@ module Springcm
       end
     end
 
+    # Copy a document to the given folder. You must specify one of: path,
+    # uid.
+    # @param path [String] Destination folder path
+    # @param uid [String] Destination folder UID
+    # @raise [ArgumentError]
     def copy(path: nil, uid: nil)
       parent = @client.folder(path: path, uid: uid)
       body = {
@@ -113,13 +118,20 @@ module Springcm
       end
     end
 
+    # Delete a document without checking if not already trash. Deletion via
+    # the API is not idempotent—if you delete a document that is in the
+    # trash, it is permanently deleted. To permanently delete a document,
+    # you must use this method.
     def delete!
       unsafe_delete
     end
 
+    # Alias delete method inherited by resource
     alias_method :unsafe_delete, :delete
     private :unsafe_delete
 
+    # Safely delete a document. If the document is in the trash, it will
+    # not be deleted.
     def delete
       reload!
       if path.start_with?("/#{@client.account.name}/Trash")
