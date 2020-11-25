@@ -2,25 +2,25 @@
 
 All notable changes to springcm-sdk will be documented in this file.
 
-## [Unreleased]
-## [1.3.0] - 2020-03-24
+## [Unreleased][]
+## [1.3.0][] - 2020-03-24
 ### Added
 * Folder#create_folder method
 
-## [1.2.0] - 2020-03-20 🎂
+## [1.2.0][] - 2020-03-20 🎂
 ### Added
 * Folder#copy method
 * Document#copy method
 
-## [1.1.0] - 2020-03-06
+## [1.1.0][] - 2020-03-06
 ### Added
 * Document#upload_version method to check in a new version of a Document.
 
-## [1.0.1] - 2020-02-14 ❤️
+## [1.0.1][] - 2020-02-14 ❤️
 ### Fixed
 * Bug with retrieving set fields
 
-## [1.0.0] - 2020-02-14 ❤️
+## [1.0.0][] - 2020-02-14 ❤️
 ### Added
 * Setting object JSON properties
 * New API for retrieving and modifying applied attributes on documents and folders
@@ -29,12 +29,12 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Removed
 * Old attribute API
 
-## [0.6.1] - 2020-01-13
+## [0.6.1][] - 2020-01-13
 ### Changed
 * Fix bug with set_attribute on repeatable set data when attribute group is not already applied - empty array of items is created.
 * Fix bug with replacing index data (mode `:replace`) in repeating sets - new data is now merged into existing set data instead of replacing it.
 
-## [0.6.0] - 2020-01-13
+## [0.6.0][] - 2020-01-13
 ### Added
 * Document versions via #versions method. Document versions behave much like
   normal Documents, but have some different behaviors.
@@ -49,7 +49,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Removed
 * `springcm` executable. Will be provided via the springcm-cli gem.
 
-## [0.5.0] - 2020-01-03
+## [0.5.0][] - 2020-01-03
 ### Added
 * #patch and #put for Resources.
 * #set_attribute for Attribute mixin.
@@ -70,7 +70,7 @@ All notable changes to springcm-sdk will be documented in this file.
   `/folders/<uid>/documents` does not include attribute groups. Tests have
   been modified to call #reload where full data is needed.
 
-## [0.4.0] - 2019-12-27
+## [0.4.0][] - 2019-12-27
 ### Added
 * Faraday middleware for authorization expiration and rate limit handling.
 * Faraday middleware for retrying on Faraday::ConnectionFailed. Can be
@@ -80,17 +80,17 @@ All notable changes to springcm-sdk will be documented in this file.
 * Adjust auth window to re-authenticate no more than 5 minutes before
   access token expiration.
 
-## [0.3.6] - 2019-12-23
+## [0.3.6][] - 2019-12-23
 ### Changed
 * Fix resource list behavior for history items. Was returning the document's
   $.HistoryItems.Href instead of the next page of HistoryItems
 
-## [0.3.5] - 2019-12-23
+## [0.3.5][] - 2019-12-23
 ### Added
 * Document#history
 * History items
 
-## [0.3.4] - 2019-12-11
+## [0.3.4][] - 2019-12-11
 ### Added
 * Folder#delete
 * Document#delete
@@ -107,30 +107,30 @@ All notable changes to springcm-sdk will be documented in this file.
   folder. Outside of folders/documents, this parent object will simply be
   the Account.
 
-## [0.3.3] - 2019-11-12
+## [0.3.3][] - 2019-11-12
 ### Changed
 * Fix issue with getting root folder by path
 
-## [0.3.2]
+## [0.3.2][]
 ### Changed
 * Fix issue with JSON library not being required
 
-## [0.3.1]
+## [0.3.1][]
 ### Changed
 * Folder#documents now properly returns a ResourceList
 
-## [0.3.0]
+## [0.3.0][]
 ### Added
 * ResourceList class, for managing paged lists of e.g. Folders and Documents
 
 ### Changed
 * Folder#folders and Folder#documents now return a ResourceList
 
-## [0.2.0]
+## [0.2.0][]
 ### Changed
 * Restructure code to match gem name
 
-## [0.1.2]
+## [0.1.2][]
 ### Added
 * Account info retrieval
 * CLI tool (not yet functional)
@@ -142,7 +142,7 @@ All notable changes to springcm-sdk will be documented in this file.
 * Client no longer accepts credentials with keyword arguments
 * Improvements to Folder object
 
-## [0.1.1] - 2019-07-17
+## [0.1.1][] - 2019-07-17
 ### Added
 * `Client#connect!` method
 * Documentation generation
@@ -151,7 +151,7 @@ All notable changes to springcm-sdk will be documented in this file.
 ### Changed
 * Fix issues with gemspec file
 
-## [0.1.0] - 2019-07-16
+## [0.1.0][] - 2019-07-16
 ### Added
 * Initial release to reserve gem name
 
