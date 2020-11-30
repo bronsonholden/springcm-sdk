@@ -4,5 +4,5 @@ source "https://rubygems.org"
 gemspec
 
 group :development, :test do
-  gem "simplecov", "~> 0.17.1"
+  gem "simplecov", "~> 0.20.0"
 end
